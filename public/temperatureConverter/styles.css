@@ -41,20 +41,24 @@ header > :not(:first-child) {
 #tempConverter {
   padding: 16px 48px;
 
-  display: grid;
-  grid:
-    "top top" auto
-    "output button" auto
-    / auto auto;
-  grid-gap: 16px;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
   font-family: monospace;
   background: hsl(0, 0%, 100%);
   border: 1px solid black;
 }
 
+#tempConverter > :not(:first-child) {
+  margin-top: 16px;
+}
+
 #tempConverter > h1 {
   grid-area: top;
   font-size: 20px;
+}
+
+input {
+  padding: 8px 16px;
 }
