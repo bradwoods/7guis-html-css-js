@@ -36,10 +36,14 @@ select {
 }
 
 button {
-  padding: 8px 16px;
+  padding: 12px 24px;
 
   font-family: inherit;
   font-size: 14px;
+  letter-spacing: 0.05em;
 
   cursor: pointer;
+  background: black;
+  color: white;
+  border: none;
 }

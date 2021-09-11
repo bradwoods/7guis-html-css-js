@@ -10,7 +10,7 @@
   align-items: center;
 
   font-family: monospace;
-  background: hsl(0, 0%, 100%);
+  background: white;
   border: 1px solid black;
 }
 
@@ -20,12 +20,16 @@
 }
 
 button {
-  padding: 8px 16px;
+  padding: 12px 24px;
 
   font-family: inherit;
   font-size: 14px;
+  letter-spacing: 0.05em;
 
   cursor: pointer;
+  background: black;
+  color: white;
+  border: none;
 }
 
 output {
