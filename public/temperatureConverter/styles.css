@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 48px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  font-size: 16px;
+  line-height: 1.5em;
+
+  background: hsl(0, 0%, 95%);
+}
+
+body > :not(:first-child) {
+  margin-top: 48px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+header > :not(:first-child) {
+  margin-top: 24px;
+}
+
+#description {
+  width: 100%;
+  max-width: 640px;
+}
+
+#description > :not(:first-child) {
+  margin-top: 24px;
+}
+
+#tempConverter {
+  padding: 16px 48px;
+
+  display: grid;
+  grid:
+    "top top" auto
+    "output button" auto
+    / auto auto;
+  grid-gap: 16px;
+  align-items: center;
+
+  font-family: monospace;
+  background: hsl(0, 0%, 100%);
+  border: 1px solid black;
+}
+
+#tempConverter > h1 {
+  grid-area: top;
+  font-size: 20px;
+}
