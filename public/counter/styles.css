@@ -16,7 +16,7 @@ body {
 }
 
 body > :not(:first-child) {
-  margin-top: 32px;
+  margin-top: 48px;
 }
 
 header {
@@ -25,7 +25,7 @@ header {
 }
 
 header > :not(:first-child) {
-  margin-top: 16px;
+  margin-top: 24px;
 }
 
 #description {
@@ -34,7 +34,7 @@ header > :not(:first-child) {
 }
 
 #description > :not(:first-child) {
-  margin-top: 16px;
+  margin-top: 24px;
 }
 
 #counter {

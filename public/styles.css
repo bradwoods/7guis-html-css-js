@@ -16,7 +16,7 @@ body {
 }
 
 body > :not(:first-child) {
-  margin-top: 32px;
+  margin-top: 48px;
 }
 
 header {
@@ -25,14 +25,18 @@ header {
 }
 
 header > :not(:first-child) {
-  margin-top: 16px;
+  margin-top: 24px;
 }
 
 nav {
   display: flex;
 }
 
-ul {
+ol {
   display: flex;
-  list-style: none;
+  flex-direction: column;
+}
+
+ol > :not(:first-child) {
+  margin-top: 16px;
 }
