@@ -40,6 +40,7 @@ function isInputBadFormat(dateInput) {
     if (date) {
       const [, day, month, year] = dateInput.match(inputFormatRegex);
 
+      // Could go deeper on this (using month to calc day upper limit, compare date to today's date to ensure it equal to or above)
       if (day > 0 && month > 0 && year > 0 && day < 32 && month < 13) {
         return false;
       }
