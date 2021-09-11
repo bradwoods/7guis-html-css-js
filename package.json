@@ -1,0 +1,20 @@
+{
+  "name": "seven-guis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon --ignore public"
+  },
+  "keywords": [],
+  "author": "brad@bradwoods.io",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "connect-livereload": "^0.6.1",
+    "livereload": "^0.9.3",
+    "nodemon": "^2.0.12"
+  }
+}
