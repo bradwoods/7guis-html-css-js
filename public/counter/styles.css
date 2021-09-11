@@ -59,7 +59,7 @@ header > :not(:first-child) {
   font-size: 20px;
 }
 
-#counter > button {
+button {
   padding: 8px 16px;
 
   font-family: inherit;
@@ -68,6 +68,6 @@ header > :not(:first-child) {
   cursor: pointer;
 }
 
-#counter > output {
+output {
   font-weight: 700;
 }
