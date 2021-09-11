@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 48px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  font-size: 16px;
+  line-height: 1.5em;
+
+  background: hsl(0, 0%, 95%);
+}
+
+body > :not(:first-child) {
+  margin-top: 48px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+header > :not(:first-child) {
+  margin-top: 24px;
+}
+
+#description {
+  width: 100%;
+  max-width: 640px;
+}
+
+#description > :not(:first-child) {
+  margin-top: 24px;
+}
+
+#flightBooker {
+  padding: 32px 48px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: monospace;
+  background: hsl(0, 0%, 100%);
+  border: 1px solid black;
+}
+
+#flightBooker > :not(:first-child) {
+  margin-top: 24px;
+}
+
+form {
+  width: 100%;
+  max-width: 340px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 14px;
+}
+
+input,
+select {
+  margin: 4px 0 24px 0;
+  padding: 8px 16px;
+}
+
+select {
+  cursor: pointer;
+}
+
+button {
+  padding: 8px 16px;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  cursor: pointer;
+}
