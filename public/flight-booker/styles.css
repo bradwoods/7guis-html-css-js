@@ -48,3 +48,8 @@ button {
   color: white;
   border: none;
 }
+
+button:disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
