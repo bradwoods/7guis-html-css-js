@@ -1,5 +1,5 @@
 #counter {
-  padding: 16px 48px;
+  padding: 48px 64px;
 
   display: grid;
   grid:
@@ -10,8 +10,9 @@
   align-items: center;
 
   font-family: monospace;
-  background: white;
+
   border: 1px solid black;
+  border-radius: 16px;
 }
 
 #counter > h1 {

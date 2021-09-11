@@ -1,13 +1,14 @@
 #tempConverter {
-  padding: 16px 48px;
+  padding: 48px 64px;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 
   font-family: monospace;
-  background: hsl(0, 0%, 100%);
+
   border: 1px solid black;
+  border-radius: 16px;
 }
 
 #tempConverter > :not(:first-child) {
