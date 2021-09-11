@@ -34,8 +34,7 @@ nav {
 }
 
 ol {
-  display: flex;
-  flex-direction: column;
+  list-style-position: inside;
 }
 
 ol > :not(:first-child) {
