@@ -37,3 +37,11 @@ header > :not(:first-child) {
 #description > :not(:first-child) {
   margin-top: 24px;
 }
+
+ul {
+  padding-left: 24px;
+}
+
+ol > :not(:first-child) {
+  margin-top: 16px;
+}

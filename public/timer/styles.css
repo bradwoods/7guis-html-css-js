@@ -1,0 +1,67 @@
+#timer {
+  padding: 48px 64px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: monospace;
+
+  border: 1px solid black;
+  border-radius: 16px;
+}
+
+#timer > :not(:first-child) {
+  margin-top: 16px;
+}
+
+#gauge {
+  display: flex;
+}
+
+#gauge > #progressOuter {
+  width: 160px;
+  margin-left: 16px;
+  padding: 2px;
+
+  border: 1px solid black;
+}
+
+#gauge > #progressOuter > #progressInner {
+  width: 0;
+  height: 100%;
+
+  background: black;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > :not(:first-child) {
+  margin-top: 16px;
+}
+
+form > #duration {
+  display: flex;
+}
+
+form > #duration > input {
+  flex-grow: 1;
+  margin-left: 16px;
+
+  cursor: pointer;
+}
+
+form > button {
+  padding: 12px 24px;
+
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+  background: black;
+  color: white;
+  border: none;
+}

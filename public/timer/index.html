@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Timer</title>
+    <link rel="stylesheet" href="../taskCommonStyles.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Back</a>
+      </nav>
+      <h1>Timer</h1>
+    </header>
+    <section id="description">
+      <p><strong>Challenge:</strong> concurrency, competing user/signal interactions, responsiveness.</p>
+      <p>Build:</p>
+      <ul>
+        <li>A frame containing a gauge for an elapsed time.</li>
+        <li>A label which shows the elapsed time as a numerical value.</li>
+        <li>A slider by which the duration of the timer can be adjusted while the timer is running.</li>
+        <li>A reset button.</li>
+        <li>
+          Adjusting the slider must immediately reflect on the duration & gauge (not only when the slider is released).
+        </li>
+        <li>
+          When the elapsed time ≥ duration, the timer stops (and the gauge will be full). If, thereafter, the duration
+          is increased such that the duration > elapsed time, the timer starts to tick until elapsed time ≥ duration
+          again.
+        </li>
+        <li>Clicking the reset button will reset elapsed time to zero.</li>
+      </ul>
+      <p>
+        Timer deals with concurrency in the sense that a timer process that updates the elapsed time runs concurrently
+        to the user’s interactions with the GUI application. This also means that the solution to competing user and
+        signal interactions is tested. The fact that slider adjustments must be reflected immediately moreover tests the
+        responsiveness of the solution. A good solution will make it clear that the signal is a timer tick and, as
+        always, has not much scaffolding.
+      </p>
+      <p>
+        Timer is directly inspired by the timer example in the paper Crossing State Lines: Adapting Object-Oriented
+        Frameworks to Functional Reactive Languages.
+      </p>
+    </section>
+    <section id="timer">
+      <h1>Timer</h1>
+      <section id="gauge">
+        Elapsed Time:
+        <div id="progressOuter">
+          <div id="progressInner"></div>
+        </div>
+      </section>
+      <output id="duration">0s</output>
+      <form>
+        <div id="duration">
+          <label for="duration">Duration:</label>
+          <input id="duration" max="100" min="0" oninput="onDurationInput(event)" step="1" type="range" value="0" />
+        </div>
+        <button onclick="onResetButtonClick()" type="button">RESET</button>
+      </form>
+    </section>
+    <script src="index.js"></script>
+  </body>
+</html>
