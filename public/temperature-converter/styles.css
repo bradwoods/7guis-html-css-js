@@ -22,4 +22,7 @@
 
 input {
   padding: 8px 16px;
+
+  background: transparent;
+  border: 1px solid var(--text-color);
 }
