@@ -47,7 +47,11 @@ header > :not(:first-child) {
   margin-top: 24px;
 }
 
-#description > ul {
+#description > ul#criteria {
+  margin-top: 4px;
+}
+
+#description ul {
   padding-left: 24px;
 }
 
