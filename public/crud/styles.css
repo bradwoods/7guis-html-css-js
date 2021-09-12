@@ -1,0 +1,93 @@
+form#crud {
+  height: 320px;
+  padding: 48px 64px;
+
+  display: grid;
+  grid:
+    "heading heading" auto
+    "filter ." auto
+    "listbox names" 1fr
+    "buttons buttons" auto
+    / 340px auto;
+  grid-gap: 16px;
+
+  font-family: monospace;
+
+  border: 1px solid var(--text-color);
+  border-radius: 16px;
+}
+
+#heading {
+  grid-area: heading;
+}
+
+#filter {
+  grid-area: filter;
+
+  display: flex;
+  align-items: center;
+}
+
+ol#listBox {
+  grid-area: listbox;
+
+  overflow: auto;
+  list-style: none;
+  border: 1px solid var(--text-color);
+}
+
+ol#listBox > li {
+  padding: 8px 16px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+#names {
+  grid-area: names;
+}
+
+#names > div,
+#filterLayout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#names > :not(:first-child) {
+  margin-top: 8px;
+}
+
+#buttons {
+  grid-area: buttons;
+}
+
+input {
+  width: 100%;
+  max-width: 160px;
+  margin-left: 8px;
+  padding: 8px 16px;
+
+  background: transparent;
+  border: 1px solid var(--text-color);
+}
+
+button {
+  padding: 12px 24px;
+
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+  background: var(--text-color);
+  color: var(--background-color);
+  border: none;
+}
+
+button:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}

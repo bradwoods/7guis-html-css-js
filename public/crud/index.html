@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>CRUD</title>
+    <link rel="stylesheet" href="../taskCommonStyles.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Back</a>
+      </nav>
+      <h1>CRUD</h1>
+    </header>
+    <section id="description">
+      <p>
+        <strong>Challenge:</strong> separating the domain and presentation logic, managing mutation, building a
+        non-trivial layout.
+      </p>
+      <p><strong>Build:</strong></p>
+      <ul>
+        <li>
+          A frame containing the following elements:
+          <ul>
+            <li>Prefix, name & surname textfields with labels.</li>
+            <li>List box.</li>
+            <li>Create, update & delete buttons.</li>
+          </ul>
+        </li>
+        <li>The list box presents a view of the data in the database that consists of a list of names.</li>
+        <li>At most one entry can be selected in the box at a time.</li>
+        <li>
+          By entering a string into the prefix textfield, the user can filter the names whose surname start with the
+          entered prefix (this should happen immediately without having to submit the prefix with enter).
+        </li>
+        <li>
+          Clicking the create button will append the resulting name from concatenating the strings in the name & surname
+          textfields to the list box.
+        </li>
+        <li>
+          The update and delete buttons are enabled if an entry in the list box is selected. In contrast to the create
+          button, the update button will not append the resulting name but instead replace the selected entry with the
+          new name.
+        </li>
+        <li>The delete button will remove the selected entry.</li>
+        <li>
+          The layout is to be done like suggested in the screenshot. In particular, the list box must occupy all the
+          remaining space.
+        </li>
+      </ul>
+      <p></p>
+      <p>
+        CRUD (Create, Read, Update and Delete) represents a typical graphical business application. The primary
+        challenge is the separation of domain and presentation logic in the source code that is more or less forced on
+        the implementer due to the ability to filter the view by a prefix. Traditionally, some form of MVC pattern is
+        used to achieve the separation of domain and presentation logic. Also, the approach to managing the mutation of
+        the list of names is tested. A good solution will have a good separation between the domain and presentation
+        logic without much overhead (e.g. in the form of toolkit specific concepts or language/paradigm concepts), a
+        mutation management that is fast but not error-prone and a natural representation of the layout (layout builders
+        are allowed, of course, but would increase the overhead).
+      </p>
+      <p>
+        CRUD is directly inspired by the crud example in the blog post FRP - Three principles for GUI elements with
+        bidirectional data flow.
+      </p>
+    </section>
+
+    <section id="assumptions">
+      <h2>Assumptions</h2>
+      <ul>
+        <li>Inputs & selected (if any) are cleared when a name is added, deleted or udpated.</li>
+        <li>Names should be displayed with capital letters.</li>
+        <li>There can't be 2 identical names.</li>
+        <li>Names are displayed in alphabetical order.</li>
+        <li>No default names or empty state message.</li>
+        <li>Selected name (if any) is cleared on filter change.</li>
+      </ul>
+    </section>
+
+    <form id="crud">
+      <h1 id="heading">CRUD</h1>
+      <div id="filterLayout">
+        <label for="filter">Filter prefix:</label>
+        <input id="filter" oninput="onFilterInput()" type="text" />
+      </div>
+      <ol id="listBox"></ol>
+      <div id="names">
+        <div>
+          <label for="name">Name:</label>
+          <input id="name" type="text" />
+        </div>
+        <div>
+          <label for="surname">Surname:</label>
+          <input id="surname" type="text" />
+        </div>
+      </div>
+      <div id="buttons">
+        <button id="create" onclick="onCreateButtonClick()" type="button">Create</button>
+        <button id="update" onclick="onUpdateClick()" type="button" disabled>Update</button>
+        <button id="delete" onclick="onDeleteClick()" type="button" disabled>Delete</button>
+      </div>
+    </form>
+    <script src="index.js"></script>
+  </body>
+</html>

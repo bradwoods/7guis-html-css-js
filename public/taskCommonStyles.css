@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: inherit;
 }
 
 html {
@@ -35,19 +36,30 @@ header > :not(:first-child) {
   margin-top: 24px;
 }
 
-#description {
+#description,
+#assumptions {
   width: 100%;
   max-width: 640px;
 }
 
-#description > :not(:first-child) {
+#description > :not(:first-child),
+#assumptions > :not(:first-child) {
   margin-top: 24px;
 }
 
-ul {
+#description > ul {
   padding-left: 24px;
 }
 
-ol > :not(:first-child) {
-  margin-top: 16px;
+#assumptions ul {
+  padding-left: 24px;
+  font-style: italic;
+
+  list-style: none;
+}
+
+#assumptions ul li:before {
+  content: "\2014";
+  position: absolute;
+  margin-left: -20px;
 }
