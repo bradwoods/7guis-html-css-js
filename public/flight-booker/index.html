@@ -16,20 +16,43 @@
     <section id="description">
       <p><strong>Challenge:</strong> Constraints.</p>
       <p><strong>Criteria:</strong></p>
+      <ul id="criteria">
+        <li>
+          Build a frame containing:
+          <ul>
+            <li>A combobox with the two options; “one-way flight” & “return flight”.</li>
+            <li>2 textfields representing the start & return date</li>
+            <li>A button for submitting the selected flight.</li>
+          </ul>
+        </li>
+        <li>The return textfield is enabled if the combobox’s value is “return flight”.</li>
+        <li>
+          When the combobox has the value “return flight” & the return textfield’s date is strictly before start
+          textfield’s then the submit button is disabled.
+        </li>
+        <li>
+          When a non-disabled textfield has an ill-formatted date then it is colored red & the submit button is
+          disabled.
+        </li>
+        <li>
+          When clicking the submit button a message is displayed informing the user of their selection (e.g. “You have
+          booked a one-way flight on 04.04.2014.”).
+        </li>
+        <li>
+          Initially:
+          <ul>
+            <li>The combobox has the value “one-way flight”.</li>
+            <li>
+              Both textfields have the same (arbitrary) date (it is implied that the return textfield is disabled).
+            </li>
+          </ul>
+        </li>
+      </ul>
       <p>
-        The task is to build a frame containing a combobox C with the two options “one-way flight” and “return flight”,
-        two textfields T1 and T2 representing the start and return date, respectively, and a button B for submitting the
-        selected flight. T2 is enabled if C’s value is “return flight”. When C has the value “return flight” and T2’s
-        date is strictly before T1’s then B is disabled. When a non-disabled textfield T has an ill-formatted date then
-        T is colored red and B is disabled. When clicking B a message is displayed informing the user of his selection
-        (e.g. “You have booked a one-way flight on 04.04.2014.”). Initially, C has the value “one-way flight” and T1 as
-        well as T2 have the same (arbitrary) date (it is implied that T2 is disabled).
-      </p>
-      <p>
-        The focus of Flight Booker lies on modelling constraints between widgets on the one hand and modelling
-        constraints within a widget on the other hand. Such constraints are very common in everyday interactions with
-        GUI applications. A good solution for Flight Booker will make the constraints clear, succinct and explicit in
-        the source code and not hidden behind a lot of scaffolding.
+        The focus of Flight Booker lies on modelling constraints between widgets on the one hand & modelling constraints
+        within a widget on the other hand. Such constraints are very common in everyday interactions with GUI
+        applications. A good solution for Flight Booker will make the constraints clear, succinct & explicit in the
+        source code & not hidden behind a lot of scaffolding.
       </p>
       <p>
         Flight Booker is directly inspired by the Flight Booking Java example in Sodium with the simplification of using
@@ -39,7 +62,7 @@
     </section>
 
     <img
-      alt="3 images of the same dialogue box in different states. The box contains text inputs, a select and a book button."
+      alt="3 images of the same dialogue box in different states. The box contains text inputs, a select & a book button."
       src="/images/flightBooker.png"
     />
 
