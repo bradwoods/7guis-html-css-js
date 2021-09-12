@@ -1,3 +1,4 @@
 {
-  "ext": "html"
+  "ext": "html",
+  "ignore": ["public"]
 }
