@@ -6,7 +6,7 @@
 
   font-family: monospace;
 
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
   border-radius: 16px;
 }
 
@@ -23,14 +23,14 @@
   margin-left: 16px;
   padding: 2px;
 
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
 }
 
 #gauge > #progressOuter > #progressInner {
   width: 0;
   height: 100%;
 
-  background: black;
+  background: var(--text-color);
 }
 
 form {
@@ -61,7 +61,7 @@ form > button {
   letter-spacing: 0.05em;
 
   cursor: pointer;
-  background: black;
-  color: white;
+  background: var(--text-color);
+  color: var(--background-color);
   border: none;
 }

@@ -11,7 +11,7 @@
 
   font-family: monospace;
 
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
   border-radius: 16px;
 }
 
@@ -28,8 +28,8 @@ button {
   letter-spacing: 0.05em;
 
   cursor: pointer;
-  background: black;
-  color: white;
+  background: var(--text-color);
+  color: var(--background-color);
   border: none;
 }
 

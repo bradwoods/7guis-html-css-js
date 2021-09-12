@@ -5,7 +5,7 @@ const oneWayOrReturnValues = {
 
 const colors = {
   red: "tomato",
-  white: "white",
+  transparent: "transparent",
 };
 
 const inputFormatRegex = /^(\d{2})\.(\d{2}).(\d{4})$/;
@@ -78,7 +78,7 @@ function colorInput(input) {
 }
 
 function uncolorInput(input) {
-  input.style.background = colors.white;
+  input.style.background = colors.transparent;
 }
 
 function colorDeparture() {
