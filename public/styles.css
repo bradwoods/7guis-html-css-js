@@ -10,6 +10,7 @@ html {
 }
 
 body {
+  min-height: 100vh;
   padding: 48px;
 
   display: flex;
@@ -23,7 +24,7 @@ body {
   background: var(--background-color);
 }
 
-body > :not(:first-child) {
+body > :not(:first-child):not(footer) {
   margin-top: 48px;
 }
 
@@ -46,4 +47,13 @@ ol {
 
 ol > :not(:first-child) {
   margin-top: 16px;
+}
+
+p {
+  width: 100%;
+  max-width: 640px;
+}
+
+footer {
+  margin-top: auto;
 }
