@@ -16,13 +16,19 @@
     <section id="description">
       <p><strong>Challenge:</strong> bidirectional data flow, user-provided text input.</p>
       <p><strong>Criteria:</strong></p>
-      <p>
-        The task is to build a frame containing two textfields TC and TF representing the temperature in Celsius and
-        Fahrenheit, respectively. Initially, both TC and TF are empty. When the user enters a numerical value into TC
-        the corresponding value in TF is automatically updated and vice versa. When the user enters a non-numerical
-        string into TC the value in TF is not updated and vice versa. The formula for converting a temperature C in
-        Celsius into a temperature F in Fahrenheit is F = C * (9/5) + 32 and the dual direction is C = (F - 32) * (5/9).
-      </p>
+      <ul id="criteria">
+        <li>
+          The task is to build a frame containing 2 textfields representing the temperature in Celsius and Fahrenheit.
+        </li>
+        <li>Initially, both textfields are empty.</li>
+        <li>
+          When the user enters a numerical value into a textfield, the corresponding value in the other is automatically
+          updated.
+        </li>
+        <li>When the user enters a non-numerical string into a textfield, the value in the other is not updated.</li>
+        <li>Formula for converting a temperature from Celsius to Fahrenheit: F = C * (9/5) + 32</li>
+        <li>Formula for converting a temperature from Fahrenheit to Celsius: C = (F - 32) * (5/9)</li>
+      </ul>
       <p>
         Temperature Converter increases the complexity of Counter by having bidirectional data flow between the Celsius
         and Fahrenheit inputs and the need to check the user input for validity. A good solution will make the
