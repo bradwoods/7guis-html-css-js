@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Circle Drawer</title>
+    <link rel="stylesheet" href="../taskCommonStyles.css" />
+    <!-- GUI ------------------------------------------------- -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/">Back</a>
+      </nav>
+      <h1>Circle Drawer</h1>
+    </header>
+
+    <section id="description">
+      <p><strong>Challenge:</strong> understanding the basic ideas of a language/toolkit.</p>
+      <p><strong>Criteria:</strong></p>
+      <ul id="criteria">
+        <li>Build a frame containing an undo and redo button as well as a canvas area underneath.</li>
+        <li>
+          Left-clicking inside an empty area inside the canvas will create an unfilled circle with a fixed diameter
+          whose center is the left-clicked point.
+        </li>
+        <li>
+          The circle nearest to the mouse pointer such that the distance from its center to the pointer is less than its
+          radius, if it exists, is filled with the color gray.
+        </li>
+        <li>The gray circle is the selected circle.</li>
+        <li>Right-clicking a selected circle will make a popup menu appear with one entry “Adjust diameter..”.</li>
+        <li>
+          Clicking on this entry will open another frame with a slider inside that adjusts the diameter of selected
+          circle (changes are applied immediately).
+        </li>
+        <li>Closing this frame will mark the last diameter as significant for the undo/redo history.</li>
+        <li>Clicking undo will undo the last significant change (i.e. circle creation or diameter adjustment).</li>
+        <li>
+          Clicking redo will reapply the last undoed change unless new changes were made by the user in the meantime.
+        </li>
+      </ul>
+      <p>
+        Circle Drawer’s goal is, among other things, to test how good the common challenge of implementing an undo/redo
+        functionality for a GUI application can be solved. In an ideal solution the undo/redo functionality comes for
+        free resp. just comes out as a natural consequence of the language / toolkit / paradigm. Moreover, Circle Drawer
+        tests how dialog control*, i.e. keeping the relevant context between several successive GUI interaction steps,
+        is achieved in the source code. Last but not least, the ease of custom drawing is tested.
+      </p>
+      <p>
+        Dialog control is explained in more detail in the paper Developing GUI Applications: Architectural Patterns
+        Revisited starting on page seven. The term describes the challenge of retaining context between successive GUI
+        operations.
+      </p>
+    </section>
+
+    <img
+      alt="A dialogue box with multiple circles (some filled, some empty), 2 buttons; undo and redo & a range control."
+      src="/images/circleDrawer.png"
+    />
+
+    <!-- GUI ------------------------------------------------- -->
+    <section id="circleDrawer">
+      <h1>Circle Drawer</h1>
+      <button id="undo" onClick="onUndoClick()" disabled>UNDO</button>
+      <button id="redo" onClick="onRedoClick()" disabled>REDO</button>
+      <svg onclick="onSvgLeftClick(event)"></svg>
+      <section id="menu">
+        <button onClick="onMenuCloseClick()" type="button">Close</button>
+        <h1>menu</h1>
+        <button onClick="onAdjustDiameterClick()">Adjust diameter</button>
+      </section>
+      <form id="adjustDiameter">
+        <button onClick="onFormCloseClick()" type="button">Close</button>
+        <label for="diameter"></label>
+        <input id="diameter" type="range" step="1" min="8" max="100" oninput="onDiameterInput(event)" />
+      </form>
+    </section>
+    <!-- GUI ------------------------------------------------- -->
+    <script src="index.js"></script>
+  </body>
+</html>

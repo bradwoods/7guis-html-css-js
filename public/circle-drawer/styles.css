@@ -1,0 +1,88 @@
+#circleDrawer {
+  padding: 48px 64px;
+
+  position: relative;
+
+  display: grid;
+  grid:
+    "heading heading" auto
+    "undo redo" auto
+    "svg svg" auto
+    / auto auto;
+  grid-gap: 16px;
+
+  font-family: monospace;
+
+  border: 1px solid var(--text-color);
+  border-radius: 16px;
+}
+
+#circleDrawer > h1 {
+  grid-area: heading;
+  justify-self: center;
+}
+
+#circleDrawer > #undo {
+  grid-area: undo;
+  justify-self: end;
+}
+
+#circleDrawer > #redo {
+  grid-area: redo;
+  justify-self: start;
+}
+
+#circleDrawer > svg {
+  grid-area: svg;
+
+  width: 360px;
+  height: 240px;
+
+  border: 1px solid var(--text-color);
+}
+
+#circleDrawer > #menu {
+  padding: 8px;
+
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: none;
+
+  border: 1px solid var(--text-color);
+  background: var(--background-color);
+}
+
+#circleDrawer > #adjustDiameter {
+  padding: 8px;
+
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: none;
+
+  border: 1px solid var(--text-color);
+  background: var(--background-color);
+}
+
+button {
+  padding: 12px 24px;
+
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+
+  cursor: pointer;
+  background: var(--text-color);
+  color: var(--background-color);
+  border: none;
+}
+
+button:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
