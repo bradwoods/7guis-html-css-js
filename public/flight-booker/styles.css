@@ -28,6 +28,10 @@ select {
   border: 1px solid var(--text-color);
 }
 
+input[aria-invalid="true"] {
+  background: tomato;
+}
+
 select {
   cursor: pointer;
 }
@@ -45,6 +49,7 @@ button {
   border: none;
 }
 
+input:disabled,
 button:disabled {
   opacity: 0.3;
   pointer-events: none;

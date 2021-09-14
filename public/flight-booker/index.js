@@ -1,29 +1,11 @@
+const ARIA_INVALID = "aria-invalid";
+
 const oneWayOrReturnValues = {
   oneWay: "oneWay",
   returnFlight: "returnFlight",
 };
 
-const colors = {
-  red: "tomato",
-  transparent: "transparent",
-};
-
 const inputFormatRegex = /^(\d{2})\.(\d{2}).(\d{4})$/;
-
-const states = {
-  oneWay: {
-    badDepartureFormat: "oneWay.BadDepartureFormat",
-    valid: "oneWay.valid",
-  },
-  returnFlight: {
-    badDepartureFormat: "returnFlight.badDepartureFormat",
-    badReturnFormat: "returnFlight.badReturnFormat",
-    earlyReturn: "returnFlight.earlyReturn",
-    valid: "returnFlight.valid",
-  },
-};
-
-let state = states.oneWay.valid;
 
 const elems = {
   departure: document.querySelector("input#departure"),
@@ -32,8 +14,119 @@ const elems = {
   submit: document.querySelector("button"),
 };
 
-// validator ---------------------------------------------------------
-function isInputBadFormat(dateInput) {
+// State --------------------------------------------------------------
+const states = {
+  oneWay: {
+    badDepartureFormat: "oneWay.BadDepartureFormat",
+    valid: "oneWay.valid",
+  },
+  returnFlight: {
+    badDepartureFormat: "returnFlight.badDepartureFormat",
+    badReturnFormat: "returnFlight.badReturnFormat",
+    badDepartureAndReturnFormat: "returnFlight.badDepartureAndReturnFormat",
+    earlyReturn: "returnFlight.earlyReturn",
+    valid: "returnFlight.valid",
+  },
+};
+
+const state = {
+  set change(value) {
+    this.value = value;
+    onStateChange(value);
+  },
+  value: states.oneWay.valid,
+};
+
+function onStateChange(state) {
+  switch (state) {
+    case states.oneWay.badDepartureFormat:
+      disable(elems.submit);
+      disable(elems.return);
+      setInvalid(elems.departure);
+      setValid(elems.return);
+      break;
+
+    case states.oneWay.valid:
+      enable(elems.submit);
+      disable(elems.return);
+      setValid(elems.departure);
+      setValid(elems.return);
+      break;
+
+    case states.returnFlight.badDepartureAndReturnFormat:
+      disable(elems.submit);
+      enable(elems.return);
+      setInvalid(elems.departure);
+      setInvalid(elems.return);
+      break;
+
+    case states.returnFlight.badDepartureFormat:
+      disable(elems.submit);
+      enable(elems.return);
+      setInvalid(elems.departure);
+      setValid(elems.return);
+      break;
+
+    case states.returnFlight.badReturnFormat:
+      disable(elems.submit);
+      enable(elems.return);
+      setValid(elems.departure);
+      setInvalid(elems.return);
+      break;
+
+    case states.returnFlight.earlyReturn:
+      disable(elems.submit);
+      enable(elems.return);
+      setValid(elems.departure);
+      setInvalid(elems.return);
+      break;
+
+    case states.returnFlight.valid:
+      enable(elems.submit);
+      enable(elems.return);
+      setValid(elems.departure);
+      setValid(elems.return);
+      break;
+
+    default:
+      throw Error(`Unknown state: ${state}`);
+  }
+}
+
+function calcState() {
+  const isBadDepart = isBadFormat(elems.departure.value);
+  const isBadReturn = isBadFormat(elems.return.value);
+
+  if (isOneWay()) {
+    state.change = isBadDepart ? states.oneWay.badDepartureFormat : states.oneWay.valid;
+    return;
+  }
+
+  if (isBadDepart && isBadReturn) {
+    state.change = states.returnFlight.badDepartureAndReturnFormat;
+    return;
+  }
+
+  if (isBadDepart) {
+    state.change = states.returnFlight.badDepartureFormat;
+    return;
+  }
+
+  if (isBadReturn) {
+    state.change = states.returnFlight.badReturnFormat;
+    return;
+  }
+
+  if (isEarlyReturn()) {
+    state.change = states.returnFlight.earlyReturn;
+    return;
+  }
+
+  state.change = states.returnFlight.valid;
+}
+
+// Validators ---------------------------------------------------------
+function isBadFormat(dateInput) {
   if (typeof dateInput === "string") {
     const date = dateInput.match(inputFormatRegex);
 
@@ -50,14 +143,6 @@ function isInputBadFormat(dateInput) {
   return true;
 }
 
-function isDepartureBadFormat() {
-  return isInputBadFormat(elems.departure.value);
-}
-
-function isReturnBadFormat() {
-  return isInputBadFormat(elems.return.value);
-}
-
 function dateInputToTimestamp(dateInput) {
   const [, day, month, year] = dateInput.match(inputFormatRegex);
 
@@ -72,137 +157,38 @@ function isOneWay() {
   return elems.oneWayOrReturn.value === oneWayOrReturnValues.oneWay;
 }
 
-// setters ---------------------------------------------------------
-function colorInput(input) {
-  input.style.background = colors.red;
+// DOM setters ---------------------------------------------------------
+function setInvalid(elem) {
+  elem.setAttribute(ARIA_INVALID, true);
 }
 
-function uncolorInput(input) {
-  input.style.background = colors.transparent;
+function setValid(elem) {
+  elem.setAttribute(ARIA_INVALID, false);
 }
 
-function colorDeparture() {
-  colorInput(elems.departure);
+function disable(elem) {
+  elem.disabled = true;
 }
 
-function colorReturn() {
-  colorInput(elems.return);
+function enable(elem) {
+  elem.disabled = false;
 }
 
-function uncolorDeparture() {
-  uncolorInput(elems.departure);
-}
-
-function uncolorReturn() {
-  uncolorInput(elems.return);
-}
-
-function enableReturn() {
-  elems.return.disabled = false;
-}
-
-function disableReturn() {
-  elems.return.disabled = true;
-}
-
-function enableSubmit() {
-  elems.submit.disabled = false;
-}
-
-function disableSubmit() {
-  elems.submit.disabled = true;
-}
-
-// state ---------------------------------------------------------
-function calcState() {
-  if (isOneWay()) {
-    state = isDepartureBadFormat() ? states.oneWay.badDepartureFormat : states.oneWay.valid;
-    return;
-  }
-
-  if (isDepartureBadFormat()) {
-    state = states.returnFlight.badDepartureFormat;
-    return;
-  }
-
-  if (isReturnBadFormat()) {
-    state = states.returnFlight.badReturnFormat;
-    return;
-  }
-
-  if (isEarlyReturn()) {
-    state = states.returnFlight.earlyReturn;
-    return;
-  }
-
-  state = states.returnFlight.valid;
-}
-
-function reactToStateChange() {
-  if (state === states.oneWay.badDepartureFormat) {
-    disableSubmit();
-    disableReturn();
-    colorDeparture();
-    uncolorReturn();
-    return;
-  }
-
-  if (state === states.oneWay.valid) {
-    enableSubmit();
-    disableReturn();
-    uncolorDeparture();
-    uncolorReturn();
-    return;
-  }
-
-  if (state === states.returnFlight.badDepartureFormat) {
-    disableSubmit();
-    enableReturn();
-    colorDeparture();
-    uncolorReturn();
-    return;
-  }
-
-  if (state === states.returnFlight.badReturnFormat) {
-    disableSubmit();
-    enableReturn();
-    uncolorDeparture();
-    colorReturn();
-    return;
-  }
-
-  if (state === states.returnFlight.earlyReturn) {
-    disableSubmit();
-    enableReturn();
-    uncolorDeparture();
-    colorReturn();
-    return;
-  }
-
-  if (state === states.returnFlight.valid) {
-    enableSubmit();
-    enableReturn();
-    uncolorDeparture();
-    uncolorReturn();
-    return;
-  }
-
-  throw Error(`Unknown state: ${state}`);
-}
-
-// DOM listeners ---------------------------------------------------------
-function onInput() {
-  calcState();
-  reactToStateChange();
-}
-
-function onSubmit(event) {
-  event.preventDefault();
-
+function showConfirmationMessage() {
   const message =
     elems.oneWayOrReturn.value === oneWayOrReturnValues.oneWay
       ? `You have booked a one-way flight on ${elems.departure.value}.`
       : `You have booked a return flight, departing on ${elems.departure.value} & returning on ${elems.return.value}.`;
 
   window.alert(message);
+}
+
+// DOM listeners ---------------------------------------------------------
+function onInput() {
+  calcState();
+}
+
+function onSubmit(event) {
+  event.preventDefault();
+  showConfirmationMessage();
 }
