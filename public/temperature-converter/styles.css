@@ -1,9 +1,8 @@
-#tempConverter {
+form {
   padding: 48px 64px;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
 
   font-family: monospace;
 
@@ -11,13 +10,26 @@
   border-radius: 16px;
 }
 
-#tempConverter > :not(:first-child) {
+form > :not(:first-child) {
   margin-top: 16px;
 }
 
-#tempConverter > h1 {
+div.row {
+  display: flex;
+  align-items: center;
+}
+
+div.row > :not(:first-child) {
+  margin-left: 16px;
+}
+
+form h1 {
   grid-area: top;
   font-size: 20px;
+}
+
+label {
+  cursor: pointer;
 }
 
 input {

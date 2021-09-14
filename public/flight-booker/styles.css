@@ -1,25 +1,18 @@
-#flightBooker {
+form {
+  width: 100%;
+  max-width: 340px;
   padding: 48px 64px;
 
   display: flex;
   flex-direction: column;
 
   font-family: monospace;
-
   border: 1px solid var(--text-color);
   border-radius: 16px;
 }
 
-#flightBooker > :not(:first-child) {
-  margin-top: 24px;
-}
-
-form {
-  width: 100%;
-  max-width: 340px;
-
-  display: flex;
-  flex-direction: column;
+form h1 {
+  margin-bottom: 24px;
 }
 
 label {

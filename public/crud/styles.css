@@ -1,10 +1,10 @@
-form#crud {
+form {
   height: 320px;
   padding: 48px 64px;
 
   display: grid;
   grid:
-    "heading heading" auto
+    "heading ." auto
     "filter ." auto
     "listbox names" 1fr
     "buttons buttons" auto
@@ -17,15 +17,16 @@ form#crud {
   border-radius: 16px;
 }
 
-#heading {
+form h1 {
   grid-area: heading;
 }
 
-#filter {
+div#filterLayout {
   grid-area: filter;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 ol#listBox {
@@ -45,22 +46,19 @@ ol#listBox > li {
   cursor: pointer;
 }
 
-#names {
+div#names {
   grid-area: names;
+
+  display: grid;
+  grid:
+    ". ." auto
+    ". ." auto
+    / auto auto;
+  grid-gap: 8px;
+  align-content: start;
 }
 
-#names > div,
-#filterLayout {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#names > :not(:first-child) {
-  margin-top: 8px;
-}
-
-#buttons {
+div#buttons {
   grid-area: buttons;
 }
 

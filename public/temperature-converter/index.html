@@ -45,16 +45,15 @@
     <img alt="A dialogue box with 2 inputs with label celsius & fahrenheit." src="/images/temperatureConverter.png" />
 
     <!-- GUI ------------------------------------------------- -->
-    <section id="tempConverter">
+    <form>
       <h1>Temperature Converter</h1>
-      <form>
+      <div class="row">
         <input id="celsius" oninput="onCelsiusInput(event)" step=".01" type="number" autofocus />
-        <label for="celsius">Celsius</label> =
-
+        <label for="celsius">Celsius</label>&nbsp;=
         <input id="fahrenheit" oninput="onFahrenheitInput(event)" step=".01" type="number" />
         <label for="fahrenheit">Fahrenheit</label>
-      </form>
-    </section>
+      </div>
+    </form>
     <!-- GUI ------------------------------------------------- -->
     <script src="index.js"></script>
   </body>

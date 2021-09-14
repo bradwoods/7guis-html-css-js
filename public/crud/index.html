@@ -81,22 +81,18 @@
     </section>
 
     <!-- GUI ------------------------------------------------- -->
-    <form id="crud">
-      <h1 id="heading">CRUD</h1>
+    <form>
+      <h1>CRUD</h1>
       <div id="filterLayout">
         <label for="filter">Filter prefix:</label>
         <input id="filter" oninput="onFilterInput()" type="text" />
       </div>
       <ol id="listBox"></ol>
       <div id="names">
-        <div>
-          <label for="name">Name:</label>
-          <input id="name" type="text" />
-        </div>
-        <div>
-          <label for="surname">Surname:</label>
-          <input id="surname" type="text" />
-        </div>
+        <label for="name">Name:</label>
+        <input id="name" type="text" />
+        <label for="surname">Surname:</label>
+        <input id="surname" type="text" />
       </div>
       <div id="buttons">
         <button id="create" onclick="onCreateButtonClick()" type="button">Create</button>

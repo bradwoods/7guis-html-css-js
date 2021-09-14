@@ -1,4 +1,4 @@
-#timer {
+section#timer {
   padding: 48px 64px;
 
   display: flex;
@@ -10,7 +10,7 @@
   border-radius: 16px;
 }
 
-#timer > :not(:first-child) {
+section#timer > :not(:first-child) {
   margin-top: 16px;
 }
 
@@ -42,18 +42,18 @@ form > :not(:first-child) {
   margin-top: 16px;
 }
 
-form > #duration {
+div#duration {
   display: flex;
 }
 
-form > #duration > input {
+input {
   flex-grow: 1;
   margin-left: 16px;
 
   cursor: pointer;
 }
 
-form > button {
+button {
   padding: 12px 24px;
 
   font-family: inherit;

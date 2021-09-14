@@ -17,12 +17,12 @@ const listBoxQuery = "ol#listBox";
 const names = new Set();
 
 const elems = {
-  filter: document.querySelector("input#filter"),
-  name: document.querySelector("input#name"),
-  surname: document.querySelector("input#surname"),
-  listBox: document.querySelector(listBoxQuery),
   create: document.querySelector("button#create"),
   delete: document.querySelector("button#delete"),
+  filter: document.querySelector("input#filter"),
+  listBox: document.querySelector(listBoxQuery),
+  name: document.querySelector("input#name"),
+  surname: document.querySelector("input#surname"),
   update: document.querySelector("button#update"),
 };
 
