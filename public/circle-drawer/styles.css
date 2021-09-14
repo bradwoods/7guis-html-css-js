@@ -1,4 +1,4 @@
-#circleDrawer {
+section#circleDrawer {
   padding: 48px 64px;
 
   position: relative;
@@ -17,22 +17,22 @@
   border-radius: 16px;
 }
 
-#circleDrawer > h1 {
+section#circleDrawer h1 {
   grid-area: heading;
   justify-self: center;
 }
 
-#circleDrawer > #undo {
+button#undo {
   grid-area: undo;
   justify-self: end;
 }
 
-#circleDrawer > #redo {
+button#redo {
   grid-area: redo;
   justify-self: start;
 }
 
-#circleDrawer > svg {
+svg {
   grid-area: svg;
 
   width: 360px;
@@ -41,7 +41,16 @@
   border: 1px solid var(--text-color);
 }
 
-#circleDrawer > #menu {
+svg.disabled {
+  pointer-events: none;
+}
+
+circle:hover,
+circle.selected {
+  fill: gray;
+}
+
+section#menu {
   padding: 8px;
 
   position: absolute;
@@ -49,13 +58,13 @@
   left: 50%;
   transform: translateX(-50%);
 
-  display: none;
+  display: flex;
 
   border: 1px solid var(--text-color);
   background: var(--background-color);
 }
 
-#circleDrawer > #adjustDiameter {
+form#adjustDiameter {
   padding: 8px;
 
   position: absolute;
@@ -63,7 +72,7 @@
   left: 50%;
   transform: translateX(-50%);
 
-  display: none;
+  display: flex;
 
   border: 1px solid var(--text-color);
   background: var(--background-color);
@@ -85,4 +94,9 @@ button {
 button:disabled {
   opacity: 0.3;
   pointer-events: none;
+}
+
+section#menu.hide,
+form#adjustDiameter.hide {
+  display: none;
 }
