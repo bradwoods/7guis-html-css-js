@@ -35,4 +35,7 @@ button {
 
 output {
   font-weight: 700;
+
+  padding: 8px 16px;
+  border: 1px solid black;
 }
