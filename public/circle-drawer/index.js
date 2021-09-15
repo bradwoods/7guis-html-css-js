@@ -199,7 +199,7 @@ function onStateChange(state) {
   }
 }
 
-// Event listeners ---------------------------------------------------------
+// DOM listeners ---------------------------------------------------------
 function onSvgClick(event) {
   const coords = mouseToSvgCoords(event);
 
