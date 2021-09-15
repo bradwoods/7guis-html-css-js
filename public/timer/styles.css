@@ -14,11 +14,11 @@ section#timer > :not(:first-child) {
   margin-top: 16px;
 }
 
-#gauge {
+section#gauge {
   display: flex;
 }
 
-#gauge > #progressOuter {
+section#gauge > #progressOuter {
   width: 160px;
   margin-left: 16px;
   padding: 2px;
@@ -26,7 +26,7 @@ section#timer > :not(:first-child) {
   border: 1px solid var(--text-color);
 }
 
-#gauge > #progressOuter > #progressInner {
+section#gauge > #progressOuter > #progressInner {
   width: 0;
   height: 100%;
 

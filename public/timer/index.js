@@ -1,5 +1,3 @@
-let elapsedTimeMS = 0;
-let durationMS = 0;
 let intervalID = null;
 
 const STEP_MS = 100;
@@ -9,7 +7,9 @@ const elems = {
   progress: document.querySelector("#progressInner"),
 };
 
+// Displaying values ---------------------------------------------------------
 function setDurationDisplay() {
+  const { elapsedTimeMS } = values;
   const currentValue = elems.duration.innerHTML;
   const newValue = `${elapsedTimeMS / 1000}s`;
 
@@ -19,6 +19,7 @@ function setDurationDisplay() {
 }
 
 function setProgressDisplay() {
+  const { durationMS, elapsedTimeMS } = values;
   const currentValue = elems.progress.style.width;
   const widthFraction = Math.min(elapsedTimeMS / durationMS, 1);
   const newValue = `${widthFraction * 100}%`;
@@ -33,7 +34,10 @@ function setDisplayValues() {
   setProgressDisplay();
 }
 
+// Values ---------------------------------------------------------
 function onValuesChange() {
+  const { durationMS, elapsedTimeMS } = values;
+
   setDisplayValues();
 
   if (elapsedTimeMS >= durationMS) {
@@ -44,6 +48,20 @@ function onValuesChange() {
   startTimer();
 }
 
+const values = {
+  set setDuration(value) {
+    this.durationMS = value;
+    onValuesChange();
+  },
+  set setElapseTime(value) {
+    this.elapsedTimeMS = value;
+    onValuesChange();
+  },
+  durationMS: 0,
+  elapsedTimeMS: 0,
+};
+
+// Timer ---------------------------------------------------------
 function stopTimer() {
   if (intervalID) {
     clearInterval(intervalID);
@@ -54,20 +72,19 @@ function stopTimer() {
 function startTimer() {
   if (!intervalID) {
     intervalID = setInterval(() => {
-      elapsedTimeMS += STEP_MS;
-      onValuesChange();
+      const { elapsedTimeMS } = values;
+
+      values.setElapseTime = elapsedTimeMS + STEP_MS;
     }, STEP_MS);
   }
 }
 
+// DOM listeners -------------------------------------------------
 function onDurationInput(event) {
   const { value } = event.target;
-
-  durationMS = value * 1000;
-  onValuesChange();
+  values.setDuration = value * 1000;
 }
 
 function onResetButtonClick() {
-  elapsedTimeMS = 0;
-  onValuesChange();
+  values.setElapseTime = 0;
 }
