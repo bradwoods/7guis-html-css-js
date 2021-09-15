@@ -5,22 +5,22 @@ possible improvement to UX:
 - empty state message like "enter a name to ..."
 - create button is disabled unless name inputs both have values
 
-possible improvement to performance:
-- updateListBox is expensive
-
 */
 
 let selected = null;
-let filteredNames = null;
 
-const listBoxQuery = "ol#listBox";
-const names = new Set();
+const classes = {
+  hide: "hide",
+  selected: "selected",
+};
+
+const names = {};
 
 const elems = {
   create: document.querySelector("button#create"),
   delete: document.querySelector("button#delete"),
   filter: document.querySelector("input#filter"),
-  listBox: document.querySelector(listBoxQuery),
+  listBox: document.querySelector("ol#listBox"),
   name: document.querySelector("input#name"),
   surname: document.querySelector("input#surname"),
   update: document.querySelector("button#update"),
@@ -39,9 +39,13 @@ function isValidNameInputValues() {
 }
 
 function isValidFilterInputValue() {
-  const filter = elems.filter.value;
+  const { value } = elems.filter;
 
-  return isValidInput(filter);
+  return isValidInput(value);
+}
+
+function isNameAvailable(name) {
+  return !names[name];
 }
 
 // formatting --------------------------------------------
@@ -56,96 +60,87 @@ function formatNameInputValues() {
   return `${capitalize(surname)}, ${capitalize(name)}`;
 }
 
-// getters --------------------------------------------
-function getLis() {
-  return document.querySelectorAll(`${listBoxQuery} li`);
-}
-
-function getLastName(name) {
-  const [last] = name.split(", ");
-  return last;
-}
-
 function getFilterRegex() {
-  const value = elems.filter.value;
-  const pattern = `^${value}`;
+  const { value } = elems.filter;
+  const pattern = `^${value.toLowerCase()}`;
 
   return new RegExp(pattern);
 }
 
-// setters --------------------------------------------
 function clearInputs() {
   elems.filter.value = "";
   elems.name.value = "";
   elems.surname.value = "";
 }
 
-function applySelectStyles(elem) {
-  elem.style.cursor = "default";
-  elem.style.color = "var(--background-color)";
-  elem.style.background = "var(--text-color)";
-}
+function addName(name) {
+  const li = document.createElement("li");
+  const content = document.createTextNode(name);
 
-function removeSelectStyles(elem) {
-  elem.style.cursor = "pointer";
-  elem.style.color = "var(--text-color)";
-  elem.style.background = "none";
-}
+  li.appendChild(content);
+  li.addEventListener("click", onNameClick);
 
-function updateListBox() {
-  removeAllLis();
-  addLisFromNames();
-}
+  names[name] = {
+    value: name,
+    elem: li,
+  };
 
-function addName() {
-  const name = formatNameInputValues();
-  names.add(name);
+  renderNames();
 }
 
 function removeName() {
-  names.delete(selected);
+  const { elem } = names[selected];
+
+  elem.removeEventListener("click", onNameClick);
+  elems.listBox.removeChild(elem);
+  delete names[selected];
+
+  clearSelect();
 }
 
-function removeAllLis() {
-  getLis().forEach((li) => {
-    li.addEventListener("click", onNameClick);
-    li.parentNode.removeChild(li);
-  });
+function derenderNames() {
+  const items = elems.listBox.children;
+
+  for (let i = 0; i < items; i++) {
+    elems.listBox.removeChild(items[i]);
+  }
 }
 
-function addLisFromNames() {
-  Array.from(filteredNames || names)
+function renderNames() {
+  derenderNames();
+
+  Object.keys(names)
     .sort()
-    .map((name) => {
-      const li = document.createElement("li");
-      const content = document.createTextNode(name);
-
-      li.appendChild(content);
-      li.addEventListener("click", onNameClick);
-
-      elems.listBox.appendChild(li);
+    .forEach((name) => {
+      elems.listBox.appendChild(names[name].elem);
     });
 }
 
-function calcFilteredNames() {
-  filteredNames = Array.from(names)
-    .filter((name) => getFilterRegex().test(name.toLowerCase()))
-    .sort();
+// Filter ---------------------------------------------------
+function clearFilterInput() {
+  elems.filter.value = "";
 }
 
-function clearFilter() {
-  if (filteredNames) {
-    filteredNames = null;
+function clearFilteredNames() {
+  const items = document.querySelectorAll("ol#listBox > .hide");
+
+  for (let i = 0; i < items.length; i++) {
+    items[i].classList.remove("hide");
   }
 
   elems.filter.value = "";
 }
 
-// selecting --------------------------------------------
-function select(elem, name) {
-  applySelectStyles(elem);
-  elem.removeEventListener("click", onNameClick);
+function clearFilter() {
+  clearFilterInput();
+  clearFilteredNames();
+}
+
+// Select ---------------------------------------------------
+function select(name) {
+  clearSelect();
   selected = name;
+  names[name].elem.classList.add(classes.selected);
 
   elems.delete.disabled = false;
   elems.update.disabled = false;
@@ -156,64 +151,66 @@ function clearSelect() {
     return;
   }
 
-  getLis().forEach((elem) => {
-    if (elem.innerHTML === selected) {
-      removeSelectStyles(elem);
-      elem.addEventListener("click", onNameClick);
-    }
-  });
-
+  names[selected]?.elem.classList.remove(classes.selected);
   elems.delete.disabled = true;
   elems.update.disabled = true;
 }
 
-// event handlers --------------------------------------------
+// DOM listeners --------------------------------------------
 function onNameClick(event) {
-  const elem = event.target;
-  const name = elem.innerHTML;
-
-  clearSelect();
-  select(elem, name);
+  const name = event.target.innerHTML;
+  select(name);
 }
 
 function onCreateButtonClick() {
   if (isValidNameInputValues()) {
-    clearFilter();
-    addName();
-    updateListBox();
-    clearInputs();
+    const formatted = formatNameInputValues();
+
+    if (isNameAvailable(formatted)) {
+      addName(formatted);
+      clearInputs();
+      clearFilter();
+    }
   }
 }
 
 function onDeleteClick() {
-  clearFilter();
   removeName();
-  clearSelect();
-  updateListBox();
 }
 
 function onUpdateClick() {
   if (isValidNameInputValues()) {
-    clearFilter();
-    removeName();
-    clearSelect();
-    addName();
-    updateListBox();
-    clearInputs();
+    const formatted = formatNameInputValues();
+
+    if (isNameAvailable(formatted)) {
+      removeName();
+      addName(formatted);
+      clearInputs();
+      clearFilter();
+    }
   }
 }
 
 function onFilterInput() {
-  if (!isValidFilterInputValue()) {
-    clearFilter();
-    updateListBox();
+  if (isValidFilterInputValue()) {
+    const items = elems.listBox.children;
+    const filter = getFilterRegex();
+
+    clearSelect();
+
+    for (let i = 0; i < items.length; i++) {
+      const elem = items[i];
+      const name = elem.innerHTML;
+
+      if (filter.test(name.toLowerCase())) {
+        elem.classList.remove(classes.hide);
+      } else {
+        elem.classList.add(classes.hide);
+      }
+    }
+
     return;
   }
 
-  calcFilteredNames();
-  updateListBox();
-
-  if (selected && !filteredNames.includes(selected)) {
-    clearSelect();
-  }
+  clearFilteredNames();
 }

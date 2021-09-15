@@ -46,6 +46,16 @@ ol#listBox > li {
   cursor: pointer;
 }
 
+ol#listBox > li.selected {
+  pointer-events: none;
+  color: var(--background-color);
+  background: var(--text-color);
+}
+
+ol#listBox > li.hide {
+  display: none;
+}
+
 div#names {
   grid-area: names;
 
