@@ -42,12 +42,17 @@ const keyCodes = {
   escape: 27,
 };
 
+// Naming convention:
+// "children listen to parents"
+// parent refers to a cell who has it's value read by other cells
+// child refers to a cell who needs to read from other cells to calculate it's value
+
 // cells values in format:
 // {
 //   computedValue: 1,
 //   elem: <input />,
-//   dependents: array of cellIds that depend on the value of this cell,
-//   formula: null || 'A1 + B1'
+//   children: [C8, D0],
+//   formula: simple excel formula '=A1 + B1' or null
 // }
 const cells = {};
 
@@ -76,7 +81,7 @@ function recalcCell(id) {
   let computedValue;
 
   try {
-    const { value } = evaluateFormula(formula);
+    const value = evaluateFormula(formula);
     computedValue = value;
   } catch (error) {
     computedValue = ERROR;
@@ -89,52 +94,51 @@ function recalcCell(id) {
 
   cells[id].elem.value = computedValue;
 
-  cells[id].dependents?.forEach((id) => {
+  cells[id].children?.forEach((id) => {
     recalcCell(id);
   });
 }
 
-// dependents ----------------------------------------
-// the child listens to the parent
-function addDependent(parentId, childId) {
-  const dependents = cells[parentId]?.dependents || [];
+// children ----------------------------------------
+function addChild(parentId, childId) {
+  const children = cells[parentId]?.children || [];
 
-  if (dependents.includes(childId)) {
+  if (children.includes(childId)) {
     return;
   }
 
-  dependents.push(childId);
+  children.push(childId);
 
   cells[parentId] = {
     ...cells[parentId],
-    dependents,
+    children,
   };
 }
 
-function removeDependent(parentId, childId) {
-  const dependents = cells[parentId]?.dependents || [];
+function removeChild(parentId, childId) {
+  const children = cells[parentId]?.children || [];
 
-  if (!dependents.includes(childId)) {
+  if (!children.includes(childId)) {
     return;
   }
 
-  cells[parentId].dependents = dependents.filter((id) => id !== childId);
+  cells[parentId].children = children.filter((id) => id !== childId);
 }
 
-function removeCellParentDependents(id) {
+function removeCellParents(id) {
   const formula = cells[id]?.formula;
 
   if (!formula) {
     return;
   }
 
-  getFormulaCellIds(formula).forEach((parentId) => {
-    removeDependent(parentId, id);
+  getFormulaParents(formula).forEach((parentId) => {
+    removeChild(parentId, id);
   });
 }
 
-function recalcDependents(id) {
-  cells[id]?.dependents?.forEach((childId) => {
+function recalcChildren(id) {
+  cells[id]?.children?.forEach((childId) => {
     recalcCell(childId);
   });
 }
@@ -158,29 +162,17 @@ function evaluateFormula(formula) {
     throw Error();
   }
 
-  const dependentCellIds = [];
-  const replaceCellsWithValues = rest.map((symbol) => {
-    if (isCellId(symbol)) {
-      dependentCellIds.push(symbol);
-      return getCellValue(symbol);
-    }
-
-    return symbol;
-  });
-
+  const replaceCellsWithValues = rest.map((symbol) => (isCellId(symbol) ? getCellValue(symbol) : symbol));
   const value = eval(replaceCellsWithValues.join(""));
 
   if (isNaN(value)) {
     throw Error();
   }
 
-  return {
-    value,
-    dependentCellIds,
-  };
+  return value;
 }
 
-function getFormulaCellIds(formula) {
+function getFormulaParents(formula) {
   return splitFormula(formula).filter((symbol) => isCellId(symbol));
 }
 
@@ -188,7 +180,7 @@ function getFormulaCellIds(formula) {
 function handleEmptyInput(elem) {
   const { id } = elem;
 
-  removeCellParentDependents(id);
+  removeCellParents(id);
 
   cells[id] = {
     ...cells[id],
@@ -196,20 +188,21 @@ function handleEmptyInput(elem) {
     computedValue: null,
   };
 
-  recalcDependents(id);
+  recalcChildren(id);
 }
 
 function handleFormulaInput(elem, formula) {
   let computedValue;
   const { id } = elem;
-  removeCellParentDependents(id);
+  removeCellParents(id);
 
   try {
-    const { value, dependentCellIds } = evaluateFormula(formula);
+    const value = evaluateFormula(formula);
+    const parents = getFormulaParents(formula);
 
     computedValue = value;
-    dependentCellIds.forEach((parentId) => {
-      addDependent(parentId, id);
+    parents.forEach((parentId) => {
+      addChild(parentId, id);
     });
   } catch (error) {
     computedValue = ERROR;
@@ -223,13 +216,13 @@ function handleFormulaInput(elem, formula) {
   };
 
   elem.value = computedValue;
-  recalcDependents(id);
+  recalcChildren(id);
 }
 
 function handleNumberInput(elem, number) {
   const { id } = elem;
 
-  removeCellParentDependents(id);
+  removeCellParents(id);
 
   cells[id] = {
     ...cells[id],
@@ -237,7 +230,7 @@ function handleNumberInput(elem, number) {
     formula: null,
   };
 
-  recalcDependents(id);
+  recalcChildren(id);
 }
 
 function parseInput(elem) {
