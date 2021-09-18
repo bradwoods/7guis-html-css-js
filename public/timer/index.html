@@ -57,20 +57,22 @@
     <!-- GUI ------------------------------------------------- -->
     <section id="timer">
       <h1>Timer</h1>
-      <section id="gauge">
-        Elapsed Time:
-        <div id="progressOuter">
-          <div id="progressInner"></div>
-        </div>
-      </section>
-      <output id="duration">0s</output>
-      <form>
-        <div id="duration">
-          <label for="duration">Duration:</label>
-          <input id="duration" max="100" min="0" oninput="onDurationInput(event)" step="1" type="range" value="0" />
-        </div>
-        <button onclick="onResetButtonClick()" type="button">RESET</button>
-      </form>
+      <div id="body">
+        <section id="gauge">
+          Elapsed Time:
+          <div id="progressOuter">
+            <div id="progressInner"></div>
+          </div>
+        </section>
+        <output id="duration">0s</output>
+        <form>
+          <div id="duration">
+            <label for="duration">Duration:</label>
+            <input id="duration" max="100" min="0" oninput="onDurationInput(event)" step="1" type="range" value="0" />
+          </div>
+          <button onclick="onResetButtonClick()" type="button">RESET</button>
+        </form>
+      </div>
     </section>
     <!-- GUI ------------------------------------------------- -->
     <script src="index.js"></script>

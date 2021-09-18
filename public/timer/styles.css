@@ -1,24 +1,43 @@
-section#timer {
-  padding: 48px 64px;
+#timer {
+  --text-color: hsla(0, 0%, 13%, 1);
+  --background-color: hsl(55, 25%, 90%);
+  --border-color: hsla(0, 0%, 13%, 1);
 
+  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+section#timer {
   display: flex;
   flex-direction: column;
 
-  font-family: monospace;
-
-  border: 1px solid var(--text-color);
-  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
 }
 
-section#timer > :not(:first-child) {
-  margin-top: 16px;
+#timer h1 {
+  font-size: 16px;
+  text-align: center;
+
+  color: var(--background-color);
+  background: var(--text-color);
 }
 
-section#gauge {
+#timer div#body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+#timer div#body > :not(:first-child) {
+  margin-top: 8px;
+}
+
+#timer section#gauge {
   display: flex;
 }
 
-section#gauge > #progressOuter {
+#timer div#progressOuter {
   width: 160px;
   margin-left: 16px;
   padding: 2px;
@@ -26,37 +45,36 @@ section#gauge > #progressOuter {
   border: 1px solid var(--text-color);
 }
 
-section#gauge > #progressOuter > #progressInner {
+#timer div#progressInner {
   width: 0;
   height: 100%;
 
   background: var(--text-color);
 }
 
-form {
+#timer div#duration {
+  display: flex;
+}
+
+#timer form {
   display: flex;
   flex-direction: column;
 }
 
-form > :not(:first-child) {
+#timer form > :not(:first-child) {
   margin-top: 16px;
 }
 
-div#duration {
-  display: flex;
-}
-
-input {
+#timer input {
   flex-grow: 1;
   margin-left: 16px;
 
   cursor: pointer;
 }
 
-button {
+#timer button {
   padding: 12px 24px;
 
-  font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.05em;
 

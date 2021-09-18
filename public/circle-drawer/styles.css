@@ -1,38 +1,52 @@
-section#circleDrawer {
-  padding: 48px 64px;
+#circleDrawer {
+  --text-color: hsla(0, 0%, 13%, 1);
+  --background-color: hsl(55, 25%, 90%);
+  --border-color: hsla(0, 0%, 13%, 1);
 
+  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+section#circleDrawer {
   position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+#circleDrawer h1 {
+  font-size: 16px;
+  text-align: center;
+
+  color: var(--background-color);
+  background: var(--text-color);
+}
+
+#circleDrawer div#body {
+  padding: 16px;
 
   display: grid;
   grid:
-    "heading heading" auto
     "undo redo" auto
     "svg svg" auto
     / auto auto;
   grid-gap: 16px;
-
-  font-family: monospace;
-
-  border: 1px solid var(--text-color);
-  border-radius: 16px;
 }
 
-section#circleDrawer h1 {
-  grid-area: heading;
-  justify-self: center;
-}
-
-button#undo {
+#circleDrawer button#undo {
   grid-area: undo;
   justify-self: end;
 }
 
-button#redo {
+#circleDrawer button#redo {
   grid-area: redo;
   justify-self: start;
 }
 
-svg {
+#circleDrawer svg {
   grid-area: svg;
 
   width: 360px;
@@ -41,47 +55,71 @@ svg {
   border: 1px solid var(--text-color);
 }
 
-svg.disabled {
+#circleDrawer svg.disabled {
   pointer-events: none;
 }
 
-circle:hover,
-circle.selected {
+#circleDrawer circle:hover,
+#circleDrawer circle.selected {
   fill: gray;
 }
 
-section#menu {
-  padding: 8px;
-
+#circleDrawer section#menu {
   position: absolute;
-  bottom: 16px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
 
   display: flex;
+  flex-direction: column;
 
   border: 1px solid var(--text-color);
-  background: var(--background-color);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
 }
 
-form#adjustDiameter {
-  padding: 8px;
+#circleDrawer form#adjustDiameter {
+  width: calc(100% - 16px);
 
   position: absolute;
-  bottom: 16px;
+  bottom: 32px;
   left: 50%;
   transform: translateX(-50%);
 
   display: flex;
+  flex-direction: column;
 
-  border: 1px solid var(--text-color);
+  font-size: 14px;
   background: var(--background-color);
+  border: 1px solid var(--text-color);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
 }
 
-button {
+#circleDrawer div#adjustDiameterBody {
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#circleDrawer div#adjustDiameterBody > :not(:first-child) {
+  margin-top: 16px;
+}
+
+#circleDrawer button.close {
+  padding: 0;
+  padding-left: 8px;
+
+  text-align: left;
+  font-size: 16px;
+  border-bottom: 1px solid var(--background-color);
+}
+
+#circleDrawer button {
   padding: 12px 24px;
 
-  font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.05em;
 
@@ -91,12 +129,12 @@ button {
   border: none;
 }
 
-button:disabled {
+#circleDrawer button:disabled {
   opacity: 0.3;
   pointer-events: none;
 }
 
-section#menu.hide,
-form#adjustDiameter.hide {
+#circleDrawer section#menu.hide,
+#circleDrawer form#adjustDiameter.hide {
   display: none;
 }

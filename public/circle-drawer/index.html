@@ -80,19 +80,22 @@
     <!-- GUI ------------------------------------------------- -->
     <section id="circleDrawer">
       <h1>Circle Drawer</h1>
-      <button id="undo" onClick="onUndoClick()" disabled>UNDO</button>
-      <button id="redo" onClick="onRedoClick()" disabled>REDO</button>
-      <svg onclick="onSvgClick(event)"></svg>
-      <section class="hide" id="menu">
-        <button onClick="onMenuCloseClick()" type="button">Close</button>
-        <h1>menu</h1>
-        <button onClick="onAdjustDiameterClick()">Adjust diameter</button>
-      </section>
-      <form class="hide" id="adjustDiameter">
-        <button onClick="onFormCloseClick()" type="button">Close</button>
-        <label for="diameter"></label>
-        <input id="diameter" type="range" step="1" min="8" max="100" oninput="onDiameterInput(event)" />
-      </form>
+      <div id="body">
+        <button id="undo" onClick="onUndoClick()" disabled>UNDO</button>
+        <button id="redo" onClick="onRedoClick()" disabled>REDO</button>
+        <svg onclick="onSvgClick(event)"></svg>
+        <section class="hide" id="menu">
+          <button class="close" onClick="onMenuCloseClick()" type="button">x</button>
+          <button onClick="onAdjustDiameterClick()">ADJUST DIAMETER</button>
+        </section>
+        <form class="hide" id="adjustDiameter">
+          <button class="close" onClick="onFormCloseClick()" type="button">x</button>
+          <div id="adjustDiameterBody">
+            <label for="diameter"></label>
+            <input id="diameter" type="range" step="1" min="8" max="100" oninput="onDiameterInput(event)" />
+          </div>
+        </form>
+      </div>
     </section>
     <!-- GUI ------------------------------------------------- -->
     <script src="index.js"></script>

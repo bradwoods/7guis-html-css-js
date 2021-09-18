@@ -1,38 +1,47 @@
-form {
-  padding: 48px 64px;
+#tempConverter {
+  --text-color: hsla(0, 0%, 13%, 1);
+  --background-color: hsl(55, 25%, 90%);
+  --border-color: hsla(0, 0%, 13%, 1);
 
+  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+form#tempConverter {
   display: flex;
   flex-direction: column;
 
-  font-family: monospace;
-
-  border: 1px solid var(--text-color);
-  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
 }
 
-form > :not(:first-child) {
+#tempConverter form > :not(:first-child) {
   margin-top: 16px;
 }
 
-div.row {
+#tempConverter h1 {
+  font-size: 16px;
+  text-align: center;
+
+  color: var(--background-color);
+  background: var(--text-color);
+}
+
+#tempConverter div.row {
+  padding: 16px;
   display: flex;
   align-items: center;
 }
 
-div.row > :not(:first-child) {
+#tempConverter div.row > :not(:first-child) {
   margin-left: 16px;
 }
 
-form h1 {
-  grid-area: top;
-  font-size: 20px;
-}
-
-label {
+#tempConverter label {
   cursor: pointer;
 }
 
-input {
+#tempConverter input {
   padding: 8px 16px;
 
   background: transparent;

@@ -1,29 +1,42 @@
+#counter {
+  --text-color: hsla(0, 0%, 13%, 1);
+  --background-color: hsl(55, 25%, 90%);
+  --border-color: hsla(0, 0%, 13%, 1);
+
+  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
 section#counter {
-  padding: 48px 64px;
+  display: flex;
+  flex-direction: column;
 
-  display: grid;
-  grid:
-    "top top" auto
-    "output button" auto
-    / auto auto;
-  grid-gap: 16px;
-  align-items: center;
-
-  font-family: monospace;
-
-  border: 1px solid var(--text-color);
-  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
 }
 
-#counter > h1 {
+#counter h1 {
   grid-area: top;
-  font-size: 20px;
+
+  font-size: 16px;
+  text-align: center;
+
+  color: var(--background-color);
+  background: var(--text-color);
 }
 
-button {
+#counter div#body {
+  padding: 16px;
+  display: flex;
+}
+
+#counter div#body > :not(:first-child) {
+  margin-left: 16px;
+}
+
+#counter button {
   padding: 12px 24px;
 
-  font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.05em;
 
@@ -33,7 +46,7 @@ button {
   border: none;
 }
 
-output {
+#counter output {
   font-weight: 700;
 
   padding: 8px 16px;

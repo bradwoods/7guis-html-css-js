@@ -1,27 +1,44 @@
-form {
+#crud {
+  --text-color: hsla(0, 0%, 13%, 1);
+  --background-color: hsl(55, 25%, 90%);
+  --border-color: hsla(0, 0%, 13%, 1);
+
+  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+form#crud {
   height: 320px;
-  padding: 48px 64px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+#crud h1 {
+  font-size: 16px;
+  text-align: center;
+
+  color: var(--background-color);
+  background: var(--text-color);
+}
+
+#crud div#body {
+  padding: 16px;
+  flex-grow: 1;
 
   display: grid;
   grid:
-    "heading ." auto
     "filter ." auto
     "listbox names" 1fr
     "buttons buttons" auto
     / 340px auto;
   grid-gap: 16px;
-
-  font-family: monospace;
-
-  border: 1px solid var(--text-color);
-  border-radius: 16px;
 }
 
-form h1 {
-  grid-area: heading;
-}
-
-div#filterLayout {
+#crud div#filterLayout {
   grid-area: filter;
 
   display: flex;
@@ -29,7 +46,7 @@ div#filterLayout {
   justify-content: space-between;
 }
 
-ol#listBox {
+#crud ol#listBox {
   grid-area: listbox;
 
   overflow: auto;
@@ -37,7 +54,7 @@ ol#listBox {
   border: 1px solid var(--text-color);
 }
 
-ol#listBox > li {
+#crud ol#listBox > li {
   padding: 8px 16px;
 
   white-space: nowrap;
@@ -46,17 +63,17 @@ ol#listBox > li {
   cursor: pointer;
 }
 
-ol#listBox > li.selected {
+#crud ol#listBox > li.selected {
   pointer-events: none;
   color: var(--background-color);
   background: var(--text-color);
 }
 
-ol#listBox > li.hide {
+#crud ol#listBox > li.hide {
   display: none;
 }
 
-div#names {
+#crud div#names {
   grid-area: names;
 
   display: grid;
@@ -68,11 +85,11 @@ div#names {
   align-content: start;
 }
 
-div#buttons {
+#crud div#buttons {
   grid-area: buttons;
 }
 
-input {
+#crud input {
   width: 100%;
   max-width: 160px;
   margin-left: 8px;
@@ -82,7 +99,7 @@ input {
   border: 1px solid var(--text-color);
 }
 
-button {
+#crud button {
   padding: 12px 24px;
 
   font-family: inherit;
@@ -95,7 +112,7 @@ button {
   border: none;
 }
 
-button:disabled {
+#crud button:disabled {
   opacity: 0.3;
   pointer-events: none;
 }

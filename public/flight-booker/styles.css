@@ -1,26 +1,45 @@
-form {
+#flightBooker {
+  --text-color: hsla(0, 0%, 13%, 1);
+  --background-color: hsl(55, 25%, 90%);
+  --border-color: hsla(0, 0%, 13%, 1);
+
+  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+form#flightBooker {
   width: 100%;
   max-width: 340px;
-  padding: 48px 64px;
 
   display: flex;
   flex-direction: column;
 
-  font-family: monospace;
-  border: 1px solid var(--text-color);
-  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-shadow: var(--shadow);
 }
 
-form h1 {
-  margin-bottom: 24px;
+#flightBooker h1 {
+  font-size: 16px;
+  text-align: center;
+
+  color: var(--background-color);
+  background: var(--text-color);
 }
 
-label {
+#flightBooker div#body {
+  width: 100%;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#flightBooker label {
   font-size: 14px;
 }
 
-input,
-select {
+#flightBooker input,
+#flightBooker select {
   margin: 4px 0 24px 0;
   padding: 8px 16px;
 
@@ -28,18 +47,17 @@ select {
   border: 1px solid var(--text-color);
 }
 
-input[aria-invalid="true"] {
+#flightBooker input[aria-invalid="true"] {
   background: tomato;
 }
 
-select {
+#flightBooker select {
   cursor: pointer;
 }
 
-button {
+#flightBooker button {
   padding: 12px 24px;
 
-  font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.05em;
 
@@ -49,8 +67,8 @@ button {
   border: none;
 }
 
-input:disabled,
-button:disabled {
+#flightBooker input:disabled,
+#flightBooker button:disabled {
   opacity: 0.3;
   pointer-events: none;
 }

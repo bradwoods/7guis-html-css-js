@@ -68,18 +68,20 @@
     />
 
     <!-- GUI ------------------------------------------------- -->
-    <form onsubmit="onSubmit(event)">
+    <form id="flightBooker" onsubmit="onSubmit(event)">
       <h1>Flight Booker</h1>
-      <label for="oneWayOrReturn">One way or return:</label>
-      <select id="oneWayOrReturn" oninput="onInput()">
-        <option value="oneWay">one-way flight</option>
-        <option value="returnFlight">return flight</option>
-      </select>
-      <label for="departure">Departure Date (format: DD.MM.YYYY):</label>
-      <input id="departure" oninput="onInput()" type="string" value="25.12.1999" />
-      <label for="return">Return Date (format: DD.MM.YYYY):</label>
-      <input disabled id="return" oninput="onInput()" type="string" value="25.12.1999" />
-      <button type="submit">BOOK</button>
+      <div id="body">
+        <label for="oneWayOrReturn">One way or return:</label>
+        <select id="oneWayOrReturn" oninput="onInput()">
+          <option value="oneWay">one-way flight</option>
+          <option value="returnFlight">return flight</option>
+        </select>
+        <label for="departure">Departure Date (format: DD.MM.YYYY):</label>
+        <input id="departure" oninput="onInput()" type="string" value="25.12.1999" />
+        <label for="return">Return Date (format: DD.MM.YYYY):</label>
+        <input disabled id="return" oninput="onInput()" type="string" value="25.12.1999" />
+        <button type="submit">BOOK</button>
+      </div>
     </form>
     <!-- GUI ------------------------------------------------- -->
     <script src="index.js"></script>

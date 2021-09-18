@@ -21,8 +21,6 @@ section#cells {
   display: flex;
   flex-direction: column;
 
-  font-family: monospace;
-
   border: 1px solid var(--border-color);
   overflow: hidden;
   border-radius: 4px;
