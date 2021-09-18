@@ -1,0 +1,95 @@
+#cells {
+  --cell-width: 120px;
+  --cell-height: 32px;
+  --row-heading-cell-width: 40px;
+
+  --text-color: hsla(0, 0%, 13%, 1);
+  --background-color: hsl(55, 25%, 90%);
+  --border-color: hsla(0, 0%, 13%, 1);
+  --cell-border-color: hsl(0, 0%, 62%);
+  --selected-color: hsl(0, 0%, 11%);
+
+  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+section#cells {
+  width: 100%;
+  max-width: 640px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: monospace;
+
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+#cells #tableLayout {
+  overflow: auto;
+}
+
+#cells h1 {
+  font-size: 16px;
+  text-align: center;
+
+  color: var(--background-color);
+  background: var(--text-color);
+}
+
+#cells table {
+  width: calc(var(--cell-width) * 26 + var(--row-heading-cell-width));
+
+  border-collapse: separate;
+  border-spacing: 0;
+  border-style: hidden;
+}
+
+#cells tr {
+  height: var(--cell-height);
+}
+
+#cells th:not(.rowHeading) {
+  width: var(--cell-width);
+
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  background: var(--background-color);
+  border: 1px solid var(--cell-border-color);
+}
+
+#cells th.rowHeading {
+  width: var(--row-heading-cell-width);
+
+  position: sticky;
+  left: 0;
+  z-index: 1;
+
+  background: var(--background-color);
+  border: 1px solid var(--cell-border-color);
+}
+
+#cells td {
+  width: var(--cell-width);
+  border: 1px solid var(--cell-border-color);
+}
+
+#cells input {
+  width: 100%;
+  height: var(--cell-height);
+  padding: 0 4px;
+
+  border: none;
+  background: transparent;
+}
+
+#cells input:focus {
+  outline: none;
+  outline: 2px solid var(--selected-color);
+}
