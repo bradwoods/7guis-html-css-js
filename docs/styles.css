@@ -35,12 +35,23 @@ body {
   background: var(--background-color);
 }
 
-body > :not(:first-child):not(footer) {
+body > :not(:first-child) {
   margin-top: 32px;
 }
 
-nav {
+header {
+  width: 100%;
+
   display: flex;
+  align-items: flex-end;
+}
+
+header p {
+  transform: translateY(4px);
+}
+
+header > :not(:first-child) {
+  margin-left: 16px;
 }
 
 #line {
@@ -59,10 +70,6 @@ ol > :not(:first-child) {
 p {
   width: 100%;
   max-width: 640px;
-}
-
-footer {
-  margin-top: auto;
 }
 
 a {
