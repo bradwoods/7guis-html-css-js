@@ -118,8 +118,11 @@ section#gui > :not(:first-child):not(h2 + *) {
   margin-top: 48px;
 }
 
-/* GUI */
-section#gui > :nth-last-child(2) {
+section#gui > section#assumptions + section#code {
+  margin-top: 24px;
+}
+
+section#gui > :first-child {
   align-self: center;
 }
 
@@ -141,7 +144,12 @@ section#gui > :nth-last-child(2) {
 }
 
 #gui ul#code {
+  display: flex;
   list-style: none;
+}
+
+#gui ul#code > :not(:first-child) {
+  margin-left: 24px;
 }
 
 section#code > :not(:first-child):not(h2 + *) {
