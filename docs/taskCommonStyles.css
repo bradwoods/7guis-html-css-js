@@ -40,6 +40,14 @@ body {
   background: var(--background-color);
 }
 
+h2 {
+  font-size: 14px;
+}
+
+h2 + * {
+  margin-top: 8px;
+}
+
 a {
   color: var(--link-color);
 }
@@ -88,14 +96,6 @@ section#assumptions > :not(:first-child) {
   margin-top: 24px;
 }
 
-#description h2 {
-  font-size: 14px;
-}
-
-#description h2 + * {
-  margin-top: 8px;
-}
-
 #description ul {
   padding-left: 24px;
 }
@@ -111,18 +111,16 @@ section#gui {
 
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
-section#gui > :not(:first-child) {
+section#gui > :not(:first-child):not(h2 + *) {
   margin-top: 48px;
 }
 
-section#gui > :last-child {
+/* GUI */
+section#gui > :nth-last-child(2) {
   align-self: center;
-}
-
-#gui section#assumptions h2 {
-  font-size: 14px;
 }
 
 #gui section#assumptions > :not(:first-child) {
@@ -140,6 +138,14 @@ section#gui > :last-child {
   content: "\2014";
   position: absolute;
   margin-left: -20px;
+}
+
+#gui ul#code {
+  list-style: none;
+}
+
+section#code > :not(:first-child):not(h2 + *) {
+  margin-top: 16px;
 }
 
 @media (max-width: 900px) {
