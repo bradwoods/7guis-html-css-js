@@ -13,10 +13,14 @@
         <a href="/">Back</a>
       </nav>
       <h1>Timer</h1>
+      <div id="line">
+        ===================================================================================================================================================================
+      </div>
     </header>
     <section id="description">
-      <p><strong>Challenge:</strong> concurrency, competing user/signal interactions, responsiveness.</p>
-      <p><strong>Criteria:</strong></p>
+      <h2>Challenge:</h2>
+      <p>Concurrency, competing user/signal interactions, responsiveness.</p>
+      <h2>Criteria:</h2>
       <ul id="criteria">
         <li>A frame containing a gauge for an elapsed time.</li>
         <li>A label which shows the elapsed time as a numerical value.</li>
@@ -43,36 +47,40 @@
         Timer is directly inspired by the timer example in the paper Crossing State Lines: Adapting Object-Oriented
         Frameworks to Functional Reactive Languages.
       </p>
+      <img
+        alt="A dialogue box with a gauge, number of seconds, range conrol and reset button."
+        src="/images/timer.png"
+      />
     </section>
 
-    <img alt="A dialogue box with a gauge, number of seconds, range conrol and reset button." src="/images/timer.png" />
+    <section id="gui">
+      <section id="assumptions">
+        <h2>Assumptions:</h2>
+        <ul>
+          <li>Timer will display in increments of 100 milliseconds</li>
+        </ul>
+      </section>
 
-    <section id="assumptions">
-      <h2>Assumptions</h2>
-      <ul>
-        <li>Timer will display in increments of 100 milliseconds</li>
-      </ul>
-    </section>
-
-    <!-- GUI ------------------------------------------------- -->
-    <section id="timer">
-      <h1>Timer</h1>
-      <div id="body">
-        <section id="gauge">
-          Elapsed Time:
-          <div id="progressOuter">
-            <div id="progressInner"></div>
-          </div>
-        </section>
-        <output id="duration">0s</output>
-        <form>
-          <div id="duration">
-            <label for="duration">Duration:</label>
-            <input id="duration" max="100" min="0" oninput="onDurationInput(event)" step="1" type="range" value="0" />
-          </div>
-          <button onclick="onResetButtonClick()" type="button">RESET</button>
-        </form>
-      </div>
+      <!-- GUI ------------------------------------------------- -->
+      <section id="timer">
+        <h1>Timer</h1>
+        <div id="body">
+          <section id="gauge">
+            Elapsed Time:
+            <div id="progressOuter">
+              <div id="progressInner"></div>
+            </div>
+          </section>
+          <output id="duration">0s</output>
+          <form>
+            <div id="duration">
+              <label for="duration">Duration:</label>
+              <input id="duration" max="100" min="0" oninput="onDurationInput(event)" step="1" type="range" value="0" />
+            </div>
+            <button onclick="onResetButtonClick()" type="button">RESET</button>
+          </form>
+        </div>
+      </section>
     </section>
     <!-- GUI ------------------------------------------------- -->
     <script src="index.js"></script>

@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-
   margin: 0;
   padding: 0;
 
@@ -9,19 +8,29 @@
 
 html {
   width: 100%;
-  display: flex;
 
-  --text-color: hsl(0, 0%, 11%);
-  --background-color: hsl(55, 25%, 90%);
+  display: flex;
+  justify-content: center;
+
+  --text-color: hsl(0, 0%, 13%);
+  --link-color: hsl(216, 85%, 34%);
+  --background-color: hsl(0, 0%, 97%);
+  --border-color: hsl(0, 0%, 13%);
 }
 
 body {
   width: 100%;
-  padding: 48px;
+  max-width: 1360px;
+  padding: 40px;
 
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid:
+    "header header" auto
+    "description gui" auto
+    / 1fr 1fr;
+  grid-gap: 32px 64px;
+  justify-items: start;
+  align-items: start;
 
   font-family: monospace;
   font-size: 14px;
@@ -31,11 +40,14 @@ body {
   background: var(--background-color);
 }
 
-body > :not(:first-child) {
-  margin-top: 48px;
+a {
+  color: var(--link-color);
 }
 
 header {
+  grid-area: header;
+
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -44,34 +56,112 @@ header > :not(:first-child) {
   margin-top: 24px;
 }
 
-#description,
-#assumptions {
+header #line {
   width: 100%;
-  max-width: 640px;
+  overflow: hidden;
 }
 
-#description > :not(:first-child),
-#assumptions > :not(:first-child) {
+section#description {
+  grid-area: description;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+section#description::after {
+  content: "";
+
+  width: 1px;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  right: -32px;
+
+  background: var(--border-color);
+}
+
+section#description > :not(:first-child):not(img):not(h2 + *),
+section#assumptions > :not(:first-child) {
   margin-top: 24px;
 }
 
-#description > ul#criteria {
-  margin-top: 4px;
+#description h2 {
+  font-size: 14px;
+}
+
+#description h2 + * {
+  margin-top: 8px;
 }
 
 #description ul {
   padding-left: 24px;
 }
 
-#assumptions ul {
+#description img {
+  max-width: 100%;
+  margin-top: 48px;
+  align-self: center;
+}
+
+section#gui {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+section#gui > :not(:first-child) {
+  margin-top: 48px;
+}
+
+section#gui > :last-child {
+  align-self: center;
+}
+
+#gui section#assumptions h2 {
+  font-size: 14px;
+}
+
+#gui section#assumptions > :not(:first-child) {
+  margin-top: 8px;
+}
+
+#gui section#assumptions ul {
   padding-left: 24px;
   font-style: italic;
 
   list-style: none;
 }
 
-#assumptions ul li:before {
+#gui #assumptions ul li:before {
   content: "\2014";
   position: absolute;
   margin-left: -20px;
+}
+
+@media (max-width: 900px) {
+  body {
+    padding: 20px;
+
+    grid:
+      "header" auto
+      "description" auto
+      "gui" auto
+      / 100%;
+
+    grid-gap: 48px;
+  }
+
+  section#description::after {
+    width: 100%;
+    height: 1px;
+
+    top: unset;
+    right: unset;
+    left: 0;
+    bottom: -24px;
+  }
 }

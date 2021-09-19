@@ -1,9 +1,9 @@
 #tempConverter {
-  --text-color: hsla(0, 0%, 13%, 1);
-  --background-color: hsl(55, 25%, 90%);
-  --border-color: hsla(0, 0%, 13%, 1);
+  --text-color: hsl(0, 0%, 13%);
+  --background-color: hsl(0, 0%, 97%);
+  --border-color: hsl(0, 0%, 13%);
 
-  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
 }
 
 form#tempConverter {
@@ -13,10 +13,6 @@ form#tempConverter {
   border: 1px solid var(--border-color);
   border-radius: 4px;
   box-shadow: var(--shadow);
-}
-
-#tempConverter form > :not(:first-child) {
-  margin-top: 16px;
 }
 
 #tempConverter h1 {
@@ -42,6 +38,7 @@ form#tempConverter {
 }
 
 #tempConverter input {
+  width: 100%;
   padding: 8px 16px;
 
   background: transparent;

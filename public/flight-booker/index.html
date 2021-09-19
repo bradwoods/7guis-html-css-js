@@ -13,10 +13,14 @@
         <a href="/">Back</a>
       </nav>
       <h1>Flight Booker</h1>
+      <div id="line">
+        ===================================================================================================================================================================
+      </div>
     </header>
     <section id="description">
-      <p><strong>Challenge:</strong> constraints.</p>
-      <p><strong>Criteria:</strong></p>
+      <h2>Challenge:</h2>
+      <p>Constraints.</p>
+      <h2>Criteria:</h2>
       <ul id="criteria">
         <li>
           Build a frame containing:
@@ -60,29 +64,30 @@
         textfields for date input instead of specialized date picking widgets as the focus of Flight Booker is not on
         specialized/custom widgets.
       </p>
+      <img
+        alt="3 images of the same dialogue box in different states. The box contains text inputs, a select & a book button."
+        src="/images/flightBooker.png"
+      />
     </section>
 
-    <img
-      alt="3 images of the same dialogue box in different states. The box contains text inputs, a select & a book button."
-      src="/images/flightBooker.png"
-    />
-
     <!-- GUI ------------------------------------------------- -->
-    <form id="flightBooker" onsubmit="onSubmit(event)">
-      <h1>Flight Booker</h1>
-      <div id="body">
-        <label for="oneWayOrReturn">One way or return:</label>
-        <select id="oneWayOrReturn" oninput="onInput()">
-          <option value="oneWay">one-way flight</option>
-          <option value="returnFlight">return flight</option>
-        </select>
-        <label for="departure">Departure Date (format: DD.MM.YYYY):</label>
-        <input id="departure" oninput="onInput()" type="string" value="25.12.1999" />
-        <label for="return">Return Date (format: DD.MM.YYYY):</label>
-        <input disabled id="return" oninput="onInput()" type="string" value="25.12.1999" />
-        <button type="submit">BOOK</button>
-      </div>
-    </form>
+    <section id="gui">
+      <form id="flightBooker" onsubmit="onSubmit(event)">
+        <h1>Flight Booker</h1>
+        <div id="body">
+          <label for="oneWayOrReturn">One way or return:</label>
+          <select id="oneWayOrReturn" oninput="onInput()">
+            <option value="oneWay">one-way flight</option>
+            <option value="returnFlight">return flight</option>
+          </select>
+          <label for="departure">Departure Date (format: DD.MM.YYYY):</label>
+          <input id="departure" oninput="onInput()" type="string" value="25.12.1999" />
+          <label for="return">Return Date (format: DD.MM.YYYY):</label>
+          <input disabled id="return" oninput="onInput()" type="string" value="25.12.1999" />
+          <button type="submit">BOOK</button>
+        </div>
+      </form>
+    </section>
     <!-- GUI ------------------------------------------------- -->
     <script src="index.js"></script>
   </body>

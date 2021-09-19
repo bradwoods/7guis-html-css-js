@@ -3,18 +3,17 @@
   --cell-height: 32px;
   --row-heading-cell-width: 40px;
 
-  --text-color: hsla(0, 0%, 13%, 1);
-  --background-color: hsl(55, 25%, 90%);
-  --border-color: hsla(0, 0%, 13%, 1);
+  --text-color: hsl(0, 0%, 13%);
+  --background-color: hsl(0, 0%, 97%);
+  --border-color: hsl(0, 0%, 13%);
   --cell-border-color: hsl(0, 0%, 62%);
   --selected-color: hsl(0, 0%, 11%);
 
-  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
 }
 
 section#cells {
   width: 100%;
-  max-width: 640px;
   height: auto;
   aspect-ratio: 4 / 3;
 
@@ -28,6 +27,11 @@ section#cells {
 }
 
 #cells #tableLayout {
+  width: 100%;
+  flex-grow: 1;
+
+  position: relative;
+
   overflow: auto;
 }
 
@@ -41,6 +45,10 @@ section#cells {
 
 #cells table {
   width: calc(var(--cell-width) * 26 + var(--row-heading-cell-width));
+
+  position: absolute;
+  top: 0;
+  left: 0;
 
   border-collapse: separate;
   border-spacing: 0;

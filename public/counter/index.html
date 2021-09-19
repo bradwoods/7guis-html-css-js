@@ -13,11 +13,15 @@
         <a href="/">Back</a>
       </nav>
       <h1>Counter</h1>
+      <div id="line">
+        ===================================================================================================================================================================
+      </div>
     </header>
 
     <section id="description">
-      <p><strong>Challenge:</strong> understanding the basic ideas of a language/toolkit.</p>
-      <p><strong>Criteria:</strong></p>
+      <h2>Challenge:</h2>
+      <p>Understanding the basic ideas of a language/toolkit.</p>
+      <h2>Criteria:</h2>
       <ul id="criteria">
         <li>Build a frame containing a label or read-only textfield and a button.</li>
         <li>Initially, the value in the textfield is 0.</li>
@@ -28,17 +32,18 @@
         simplest GUI applications imaginable. Thus, Counter reveals the required scaffolding and how the very basic
         features work together to build a GUI application. A good solution will have almost no scaffolding.
       </p>
+      <img alt="A dialogue box with a number and a Count button." src="/images/counter.png" />
     </section>
 
-    <img alt="A dialogue box with a number and a Count button." src="/images/counter.png" />
-
-    <!-- GUI ------------------------------------------------- -->
-    <section id="counter">
-      <h1>Counter</h1>
-      <div id="body">
-        <output id="counterOutput">0</output>
-        <button type="button" onClick="countButtonClicked()">COUNT</button>
-      </div>
+    <section id="gui">
+      <!-- GUI ------------------------------------------------- -->
+      <section id="counter">
+        <h1>Counter</h1>
+        <div id="body">
+          <output id="counterOutput">0</output>
+          <button type="button" onClick="countButtonClicked()">COUNT</button>
+        </div>
+      </section>
     </section>
     <!-- GUI ------------------------------------------------- -->
     <script src="index.js"></script>

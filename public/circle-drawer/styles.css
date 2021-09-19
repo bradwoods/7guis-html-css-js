@@ -1,9 +1,9 @@
 #circleDrawer {
-  --text-color: hsla(0, 0%, 13%, 1);
-  --background-color: hsl(55, 25%, 90%);
-  --border-color: hsla(0, 0%, 13%, 1);
+  --text-color: hsl(0, 0%, 13%);
+  --background-color: hsl(0, 0%, 97%);
+  --border-color: hsl(0, 0%, 13%);
 
-  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --shadow: 0 3px 6px hsla(0, 0%, 0%, 0.16), 0 3px 6px hsla(0, 0%, 0%, 0.23);
 }
 
 section#circleDrawer {

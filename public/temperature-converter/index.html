@@ -13,10 +13,14 @@
         <a href="/">Back</a>
       </nav>
       <h1>Temperature Converter</h1>
+      <div id="line">
+        ===================================================================================================================================================================
+      </div>
     </header>
     <section id="description">
-      <p><strong>Challenge:</strong> bidirectional data flow, user-provided text input.</p>
-      <p><strong>Criteria:</strong></p>
+      <h2>Challenge:</h2>
+      <p>Bidirectional data flow, user-provided text input.</p>
+      <h2>Criteria:</h2>
       <ul id="criteria">
         <li>
           The task is to build a frame containing 2 textfields representing the temperature in Celsius and Fahrenheit.
@@ -40,27 +44,28 @@
         such a widespread example—sometimes also in the form of a currency converter—that one could give a thousand
         references. The same is true for the Counter task.
       </p>
+      <img alt="A dialogue box with 2 inputs with label celsius & fahrenheit." src="/images/temperatureConverter.png" />
     </section>
 
-    <img alt="A dialogue box with 2 inputs with label celsius & fahrenheit." src="/images/temperatureConverter.png" />
+    <section id="gui">
+      <section id="assumptions">
+        <h2>Assumptions:</h2>
+        <ul>
+          <li>Temperature accuracy is to 2 decimal points.</li>
+        </ul>
+      </section>
 
-    <section id="assumptions">
-      <h2>Assumptions</h2>
-      <ul>
-        <li>Temperature accuracy is to 2 decimal points.</li>
-      </ul>
+      <!-- GUI ------------------------------------------------- -->
+      <form id="tempConverter">
+        <h1>Temperature Converter</h1>
+        <div class="row">
+          <input id="celsius" oninput="onCelsiusInput(event)" step=".01" type="number" autofocus />
+          <label for="celsius">Celsius</label>&nbsp;=
+          <input id="fahrenheit" oninput="onFahrenheitInput(event)" step=".01" type="number" />
+          <label for="fahrenheit">Fahrenheit</label>
+        </div>
+      </form>
     </section>
-
-    <!-- GUI ------------------------------------------------- -->
-    <form id="tempConverter">
-      <h1>Temperature Converter</h1>
-      <div class="row">
-        <input id="celsius" oninput="onCelsiusInput(event)" step=".01" type="number" autofocus />
-        <label for="celsius">Celsius</label>&nbsp;=
-        <input id="fahrenheit" oninput="onFahrenheitInput(event)" step=".01" type="number" />
-        <label for="fahrenheit">Fahrenheit</label>
-      </div>
-    </form>
     <!-- GUI ------------------------------------------------- -->
     <script src="index.js"></script>
   </body>
