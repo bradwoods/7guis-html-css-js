@@ -4,7 +4,7 @@ const livereload = require("livereload");
 const connectLivereload = require("connect-livereload");
 
 const PORT = 7000;
-const publicDirectory = path.join(__dirname, "../public");
+const publicDirectory = path.join(__dirname, "../docs");
 
 const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(publicDirectory);
