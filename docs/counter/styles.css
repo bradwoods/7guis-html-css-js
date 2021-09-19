@@ -28,10 +28,7 @@ section#counter {
 #counter div#body {
   padding: 16px;
   display: flex;
-}
-
-#counter div#body > :not(:first-child) {
-  margin-left: 16px;
+  gap: 16px;
 }
 
 #counter button {

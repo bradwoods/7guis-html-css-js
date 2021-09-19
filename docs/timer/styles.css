@@ -25,12 +25,10 @@ section#timer {
 
 #timer div#body {
   padding: 16px;
+
   display: flex;
   flex-direction: column;
-}
-
-#timer div#body > :not(:first-child) {
-  margin-top: 8px;
+  gap: 8px;
 }
 
 #timer section#gauge {
@@ -59,10 +57,7 @@ section#timer {
 #timer form {
   display: flex;
   flex-direction: column;
-}
-
-#timer form > :not(:first-child) {
-  margin-top: 16px;
+  gap: 16px;
 }
 
 #timer input {

@@ -25,12 +25,10 @@ form#tempConverter {
 
 #tempConverter div.row {
   padding: 16px;
+
   display: flex;
   align-items: center;
-}
-
-#tempConverter div.row > :not(:first-child) {
-  margin-left: 16px;
+  gap: 16px;
 }
 
 #tempConverter label {

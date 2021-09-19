@@ -102,10 +102,7 @@ section#circleDrawer {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-#circleDrawer div#adjustDiameterBody > :not(:first-child) {
-  margin-top: 16px;
+  gap: 16px;
 }
 
 #circleDrawer button.close {

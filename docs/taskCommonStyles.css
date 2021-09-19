@@ -44,10 +44,6 @@ h2 {
   font-size: 14px;
 }
 
-h2 + * {
-  margin-top: 8px;
-}
-
 a {
   color: var(--link-color);
 }
@@ -56,12 +52,10 @@ header {
   grid-area: header;
 
   width: 100%;
+
   display: flex;
   flex-direction: column;
-}
-
-header > :not(:first-child) {
-  margin-top: 24px;
+  gap: 24px;
 }
 
 header #line {
@@ -76,6 +70,7 @@ section#description {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 8px;
 }
 
 section#description::after {
@@ -91,9 +86,9 @@ section#description::after {
   background: var(--border-color);
 }
 
-section#description > :not(:first-child):not(img):not(h2 + *),
-section#assumptions > :not(:first-child) {
-  margin-top: 24px;
+#description > p + h2,
+#description > ul + p {
+  margin-top: 16px;
 }
 
 #description ul {
@@ -112,48 +107,39 @@ section#gui {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-section#gui > :not(:first-child):not(h2 + *) {
-  margin-top: 48px;
-}
-
-section#gui > section#assumptions + section#code {
-  margin-top: 24px;
+  gap: 24px;
 }
 
 section#gui > :first-child {
+  margin-bottom: 24px;
   align-self: center;
 }
 
-#gui section#assumptions > :not(:first-child) {
-  margin-top: 8px;
+section#assumptions,
+section#code {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-#gui section#assumptions ul {
+#assumptions ul {
   padding-left: 24px;
   font-style: italic;
 
   list-style: none;
 }
 
-#gui #assumptions ul li:before {
+#assumptions ul li:before {
   content: "\2014";
   position: absolute;
   margin-left: -20px;
 }
 
-#gui ul#code {
+#code ul {
   display: flex;
+  gap: 24px;
+
   list-style: none;
-}
-
-#gui ul#code > :not(:first-child) {
-  margin-left: 24px;
-}
-
-section#code > :not(:first-child):not(h2 + *) {
-  margin-top: 16px;
 }
 
 @media (max-width: 900px) {
