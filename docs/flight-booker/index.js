@@ -29,16 +29,26 @@ const states = {
   },
 };
 
-const state = {
-  set change(value) {
-    this.value = value;
-    onStateChange(value);
-  },
-  value: states.oneWay.valid,
-};
+// Using an initState function to ensure the state value can't be changed unless through state.set(), ensuring 'onStateChange' is triggered
+// a 'setter' could have been used here however:
+//  - it introduces a new API, increasing complexity
+//  - a setter property can be changed without calling the set function, making it more brittle than the below approach
+function initState() {
+  const returnVal = {
+    value: states.oneWay.valid,
+    set: (newState) => {
+      returnVal.value = newState;
+      onStateChange(newState);
+    },
+  };
 
-function onStateChange(state) {
-  switch (state) {
+  return returnVal;
+}
+
+const state = initState();
+
+function onStateChange(value) {
+  switch (value) {
     case states.oneWay.badDepartureFormat:
       disable(elems.submit);
       disable(elems.return);
@@ -98,31 +108,31 @@ function calcState() {
   const isBadReturn = isBadFormat(elems.return.value);
 
   if (isOneWay()) {
-    state.change = isBadDepart ? states.oneWay.badDepartureFormat : states.oneWay.valid;
+    state.set(isBadDepart ? states.oneWay.badDepartureFormat : states.oneWay.valid);
     return;
   }
 
   if (isBadDepart && isBadReturn) {
-    state.change = states.returnFlight.badDepartureAndReturnFormat;
+    state.set(states.returnFlight.badDepartureAndReturnFormat);
     return;
   }
 
   if (isBadDepart) {
-    state.change = states.returnFlight.badDepartureFormat;
+    state.set(states.returnFlight.badDepartureFormat);
     return;
   }
 
   if (isBadReturn) {
-    state.change = states.returnFlight.badReturnFormat;
+    state.set(states.returnFlight.badReturnFormat);
     return;
   }
 
   if (isEarlyReturn()) {
-    state.change = states.returnFlight.earlyReturn;
+    state.set(states.returnFlight.earlyReturn);
     return;
   }
 
-  state.change = states.returnFlight.valid;
+  state.set(states.returnFlight.valid);
 }
 
 // Validators ---------------------------------------------------------
