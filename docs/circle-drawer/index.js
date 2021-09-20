@@ -163,16 +163,26 @@ const states = {
   formOpen: "formOpen",
 };
 
-const state = {
-  set change(value) {
-    this.value = value;
-    onStateChange(value);
-  },
-  value: states.default,
-};
+// Using an initState function to ensure the state value can't be changed unless through state.set(), ensuring 'onStateChange' is triggered
+// a 'setter' could have been used here however:
+//  - it introduces a new API, increasing complexity
+//  - a setter property can be changed without calling the set function, making it more brittle than the below approach
+function initState() {
+  const returnVal = {
+    value: states.default,
+    set: (newState) => {
+      returnVal.value = newState;
+      onStateChange(newState);
+    },
+  };
 
-function onStateChange(state) {
-  switch (state) {
+  return returnVal;
+}
+
+const state = initState();
+
+function onStateChange(value) {
+  switch (value) {
     case states.default:
       if (changes.length > 0) {
         enable(elems.undo);
@@ -194,8 +204,11 @@ function onStateChange(state) {
       disableSvg();
       break;
 
+    case states.formOpen:
+      break;
+
     default:
-      throw Error(`Unknown state: ${state}`);
+      throw Error(`Unknown state: ${value}`);
   }
 }
 
@@ -216,17 +229,17 @@ function onCircleClick(event) {
 function onCircleRightClick(event) {
   event.preventDefault();
   select(event.target);
-  state.change = states.menuOpen;
+  state.set(states.menuOpen);
 }
 
 function onAdjustDiameterClick() {
   loadForm();
   hide(elems.menu);
-  state.change = states.formOpen;
+  state.set(states.formOpen);
 }
 
 function onMenuCloseClick() {
-  state.change = states.default;
+  state.set(states.default);
 }
 
 function onDiameterInput(event) {
@@ -236,7 +249,7 @@ function onDiameterInput(event) {
 
 function onFormCloseClick() {
   logDiameterChange();
-  state.change = states.default;
+  state.set(states.default);
 }
 
 function onUndoClick() {
