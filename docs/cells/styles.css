@@ -14,8 +14,10 @@
 
 section#cells {
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
+  /* Unfortunatley, this doesn't work with Safari so setting height in pixels as a work around */
+  /* height: auto; */
+  /* aspect-ratio: 4 / 3; */
+  height: 340px;
 
   display: flex;
   flex-direction: column;
