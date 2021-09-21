@@ -83,6 +83,11 @@ section#cells {
   border: 1px solid var(--cell-border-color);
 }
 
+#cells #topLeftSquare {
+  z-index: 2;
+  top: 0;
+}
+
 #cells td {
   width: var(--cell-width);
   border: 1px solid var(--cell-border-color);
