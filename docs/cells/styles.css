@@ -4,7 +4,7 @@
   --row-heading-cell-width: 40px;
 
   --text-color: hsl(0, 0%, 13%);
-  --background-color: hsl(0, 0%, 97%);
+  --background-color: hsl(0, 0%, 100%);
   --border-color: hsl(0, 0%, 13%);
   --cell-border-color: hsl(0, 0%, 62%);
   --selected-color: hsl(0, 0%, 11%);
@@ -22,6 +22,7 @@ section#cells {
   display: flex;
   flex-direction: column;
 
+  background: var(--background-color);
   border: 1px solid var(--border-color);
   overflow: hidden;
   border-radius: 4px;
@@ -68,7 +69,6 @@ section#cells {
   top: 0;
   z-index: 2;
 
-  background: var(--background-color);
   border: 1px solid var(--cell-border-color);
 }
 
