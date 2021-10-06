@@ -69,6 +69,7 @@ section#cells {
   top: 0;
   z-index: 2;
 
+  background: var(--background-color);
   border: 1px solid var(--cell-border-color);
 }
 
