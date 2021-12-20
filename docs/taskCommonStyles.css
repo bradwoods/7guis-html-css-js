@@ -46,24 +46,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 400;
-  overflow-wrap: break-word;
-}
-
 h1 {
   font-weight: 700;
+  overflow-wrap: break-word;
 }
 
 h2 {
   font-size: 14px;
   font-weight: 700;
+  overflow-wrap: break-word;
+}
+
+p {
+  font-weight: 400;
+  overflow-wrap: break-word;
 }
 
 img {
