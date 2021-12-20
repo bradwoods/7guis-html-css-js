@@ -1,15 +1,18 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-
-  font-family: inherit;
-}
-
 :root {
   --text-color: hsl(0, 0%, 13%);
   --link-color: hsl(216, 85%, 34%);
   --background-color: hsl(0, 0%, 97%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -35,6 +38,22 @@ body {
 
   color: var(--text-color);
   background: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-weight: 700;
 }
 
 body > :not(:first-child) {
@@ -46,14 +65,11 @@ header {
 
   display: flex;
   align-items: flex-end;
+  gap: 16px;
 }
 
 header p {
   transform: translateY(4px);
-}
-
-header > :not(:first-child) {
-  margin-left: 16px;
 }
 
 #line {
@@ -62,11 +78,11 @@ header > :not(:first-child) {
 }
 
 ol {
-  list-style-position: inside;
-}
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 
-ol > :not(:first-child) {
-  margin-top: 16px;
+  list-style-position: inside;
 }
 
 p {
