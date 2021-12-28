@@ -8,15 +8,15 @@ The [7 GUIs](https://eugenkiss.github.io/7guis/) tasks written in vanilla HTML, 
 
 ## 🛠️ Installation Steps
 
-1. Install packges
+1. Install packages:
 
-```
+```bash
 npm install
 ```
 
-2. Start dev server
+2. Start dev server:
 
-```
+```bash
 npm run dev
 ```
 
