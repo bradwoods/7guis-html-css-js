@@ -2,11 +2,11 @@
 
 The [7 GUIs](https://eugenkiss.github.io/7guis/) tasks written in vanilla HTML, CSS &amp; JS.
 
-## 🚀 Demo
+## Demo
 
 [https://7guis.bradwoods.io/](https://7guis.bradwoods.io/)
 
-## 🛠️ Installation Steps
+## Installation Steps
 
 1. Install packages:
 
@@ -24,6 +24,6 @@ npm run dev
 
 Files are stored in `/docs` instead of the convention `/public` because GitHub pages only allows `root` or `/docs`
 
-## 🛡️ License
+## License
 
-This project is licensed under the MIT
+This project is licensed under the MIT.
