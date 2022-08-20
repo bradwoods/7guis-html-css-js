@@ -1,22 +1,41 @@
-const elems = {
-  celsius: document.querySelector("input#celsius"),
-  fahrenheit: document.querySelector("input#fahrenheit"),
-};
+const CEL_ID = "celsius";
+const celInput = document.querySelector(`#${CEL_ID}`);
+const farInput = document.querySelector("#fahrenheit");
 
-function celsiusToFahrenheit(temp) {
-  return (temp * 9) / 5 + 32;
+function celToFar(cel) {
+  return (cel * 9) / 5 + 32;
 }
 
-function fahrenheitToCelsius(temp) {
-  return ((temp - 32) * 5) / 9;
+function farToCel(far) {
+  return ((far - 32) * 5) / 9;
 }
 
-function onCelsiusInput(event) {
-  const { value } = event.target;
-  fahrenheit.value = celsiusToFahrenheit(value).toFixed(2);
+function formatVal(value) {
+  return value.toFixed(2);
 }
 
-function onFahrenheitInput(event) {
-  const { value } = event.target;
-  celsius.value = fahrenheitToCelsius(value).toFixed(2);
+function changeInputVal(elem, value) {
+  elem.value = formatVal(value);
 }
+
+function clearInput(elem) {
+  elem.value = "";
+}
+
+function onInput(event) {
+  const { value, id } = event.target;
+  const otherInput = id === CEL_ID ? farInput : celInput;
+
+  if (value === "") {
+    clearInput(otherInput);
+    return;
+  }
+
+  {
+    const otherValue = id === CEL_ID ? celToFar(value) : farToCel(value);
+    changeInputVal(otherInput, otherValue);
+  }
+}
+
+celInput.oninput = onInput;
+farInput.oninput = onInput;
