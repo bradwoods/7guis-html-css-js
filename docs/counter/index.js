@@ -1,8 +1,11 @@
-const counterOutput = document.querySelector("#counterOutput");
+(function () {
+  const button = document.querySelector("button");
+  const output = document.querySelector("output");
 
-function countButtonClicked() {
-  const currentVal = parseInt(counterOutput.innerHTML);
-  const newVal = currentVal + 1;
+  let count = 0;
 
-  counterOutput.innerHTML = newVal;
-}
+  button.onclick = function () {
+    count++;
+    output.textContent = count;
+  };
+})();
