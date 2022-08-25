@@ -5,14 +5,71 @@ const oneWayOrReturnValues = {
   returnFlight: "returnFlight",
 };
 
-const inputFormatRegex = /^(\d{2})\.(\d{2}).(\d{4})$/;
-
 const elems = {
-  departure: document.querySelector("input#departure"),
-  oneWayOrReturn: document.querySelector("select#oneWayOrReturn"),
-  return: document.querySelector("input#return"),
-  submit: document.querySelector("button"),
+  departure: document.querySelector("#departure"),
+  oneWayOrReturn: document.querySelector("#oneWayOrReturn"),
+  return: document.querySelector("#return"),
+  book: document.querySelector("#book"),
 };
+
+// DOM setters ---------------------------------------------------------
+function setError(elem) {
+  elem.setAttribute(ARIA_INVALID, true);
+}
+
+function clearError(elem) {
+  elem.setAttribute(ARIA_INVALID, false);
+}
+
+function disable(elem) {
+  elem.disabled = true;
+}
+
+function enable(elem) {
+  elem.disabled = false;
+}
+
+function showConfirmation() {
+  const message =
+    elems.oneWayOrReturn.value === oneWayOrReturnValues.oneWay
+      ? `You have booked a one-way flight on ${elems.departure.value}.`
+      : `You have booked a return flight, departing on ${elems.departure.value} & returning on ${elems.return.value}.`;
+
+  window.alert(message);
+}
+
+// Validators ---------------------------------------------------------
+function isOneWay() {
+  return elems.oneWayOrReturn.value === oneWayOrReturnValues.oneWay;
+}
+
+function isValidDate(date) {
+  return date instanceof Date && !isNaN(date);
+}
+
+function inputValueToDate(value) {
+  const split = value.split(".");
+  const [day, month, year] = split;
+
+  return new Date(`${year}-${month}-${day}`);
+}
+
+function isBadFormat(value) {
+  const split = value.split(".");
+
+  if (split.length !== 3) return true;
+
+  const date = inputValueToDate(value);
+
+  return !isValidDate(date);
+}
+
+function isEarlyReturn() {
+  const start = inputValueToDate(elems.departure.value).valueOf();
+  const end = inputValueToDate(elems.return.value).valueOf();
+
+  return end < start;
+}
 
 // State --------------------------------------------------------------
 const states = {
@@ -29,63 +86,55 @@ const states = {
   },
 };
 
-const state = {
-  set change(value) {
-    this.value = value;
-    onStateChange(value);
-  },
-  value: states.oneWay.valid,
-};
-
 function onStateChange(state) {
   switch (state) {
     case states.oneWay.badDepartureFormat:
-      disable(elems.submit);
+      disable(elems.book);
       disable(elems.return);
-      setInvalid(elems.departure);
-      setValid(elems.return);
+      setError(elems.departure);
+      clearError(elems.return);
       break;
 
     case states.oneWay.valid:
-      enable(elems.submit);
+      enable(elems.book);
       disable(elems.return);
-      setValid(elems.departure);
-      setValid(elems.return);
+      clearError(elems.departure);
+      clearError(elems.return);
       break;
 
     case states.returnFlight.badDepartureAndReturnFormat:
-      disable(elems.submit);
+      disable(elems.book);
       enable(elems.return);
-      setInvalid(elems.departure);
-      setInvalid(elems.return);
+      setError(elems.departure);
+      setError(elems.return);
       break;
 
     case states.returnFlight.badDepartureFormat:
-      disable(elems.submit);
+      disable(elems.book);
       enable(elems.return);
-      setInvalid(elems.departure);
-      setValid(elems.return);
+      setError(elems.departure);
+      clearError(elems.return);
       break;
 
     case states.returnFlight.badReturnFormat:
-      disable(elems.submit);
+      disable(elems.book);
       enable(elems.return);
-      setValid(elems.departure);
-      setInvalid(elems.return);
+      clearError(elems.departure);
+      setError(elems.return);
       break;
 
     case states.returnFlight.earlyReturn:
-      disable(elems.submit);
+      disable(elems.book);
       enable(elems.return);
-      setValid(elems.departure);
-      setInvalid(elems.return);
+      clearError(elems.departure);
+      setError(elems.return);
       break;
 
     case states.returnFlight.valid:
-      enable(elems.submit);
+      enable(elems.book);
       enable(elems.return);
-      setValid(elems.departure);
-      setValid(elems.return);
+      clearError(elems.departure);
+      clearError(elems.return);
       break;
 
     default:
@@ -98,97 +147,39 @@ function calcState() {
   const isBadReturn = isBadFormat(elems.return.value);
 
   if (isOneWay()) {
-    state.change = isBadDepart ? states.oneWay.badDepartureFormat : states.oneWay.valid;
-    return;
+    return isBadDepart ? states.oneWay.badDepartureFormat : states.oneWay.valid;
   }
 
   if (isBadDepart && isBadReturn) {
-    state.change = states.returnFlight.badDepartureAndReturnFormat;
-    return;
+    return states.returnFlight.badDepartureAndReturnFormat;
   }
 
   if (isBadDepart) {
-    state.change = states.returnFlight.badDepartureFormat;
-    return;
+    return states.returnFlight.badDepartureFormat;
   }
 
   if (isBadReturn) {
-    state.change = states.returnFlight.badReturnFormat;
-    return;
+    return states.returnFlight.badReturnFormat;
   }
 
   if (isEarlyReturn()) {
-    state.change = states.returnFlight.earlyReturn;
-    return;
+    return states.returnFlight.earlyReturn;
   }
 
-  state.change = states.returnFlight.valid;
+  return states.returnFlight.valid;
 }
 
-// Validators ---------------------------------------------------------
-function isBadFormat(dateInput) {
-  if (typeof dateInput === "string") {
-    const date = dateInput.match(inputFormatRegex);
-
-    if (date) {
-      const [, day, month, year] = dateInput.match(inputFormatRegex);
-
-      // Could go deeper on this (using month to calc day upper limit, compare date to today's date to ensure it equal to or above)
-      if (day > 0 && month > 0 && year > 0 && day < 32 && month < 13) {
-        return false;
-      }
-    }
-  }
-
-  return true;
-}
-
-function dateInputToTimestamp(dateInput) {
-  const [, day, month, year] = dateInput.match(inputFormatRegex);
-
-  return new Date(`${year}-${month}-${day}`).getTime();
-}
-
-function isEarlyReturn() {
-  return dateInputToTimestamp(elems.return.value) < dateInputToTimestamp(elems.departure.value);
-}
-
-function isOneWay() {
-  return elems.oneWayOrReturn.value === oneWayOrReturnValues.oneWay;
-}
-
-// DOM setters ---------------------------------------------------------
-function setInvalid(elem) {
-  elem.setAttribute(ARIA_INVALID, true);
-}
-
-function setValid(elem) {
-  elem.setAttribute(ARIA_INVALID, false);
-}
-
-function disable(elem) {
-  elem.disabled = true;
-}
-
-function enable(elem) {
-  elem.disabled = false;
-}
-
-function showConfirmationMessage() {
-  const message =
-    elems.oneWayOrReturn.value === oneWayOrReturnValues.oneWay
-      ? `You have booked a one-way flight on ${elems.departure.value}.`
-      : `You have booked a return flight, departing on ${elems.departure.value} & returning on ${elems.return.value}.`;
-
-  window.alert(message);
+function onInputChange() {
+  const state = calcState();
+  onStateChange(state);
 }
 
 // DOM listeners ---------------------------------------------------------
-function onInput() {
-  calcState();
-}
+elems.oneWayOrReturn.onchange = onInputChange;
+elems.departure.oninput = onInputChange;
+elems.return.oninput = onInputChange;
 
-function onSubmit(event) {
+elems.book.onclick = function (event) {
   event.preventDefault();
-  showConfirmationMessage();
-}
+  showConfirmation();
+};
