@@ -49,16 +49,20 @@ function onValuesChange() {
 }
 
 const values = {
-  set setDuration(value) {
-    this.durationMS = value;
+  set durationMS(value) {
+    this._durationMS_ = value;
     onValuesChange();
   },
-  set setElapseTime(value) {
-    this.elapsedTimeMS = value;
+  set elapseTimeMS(value) {
+    this._elapsedTimeMS_ = value;
     onValuesChange();
   },
-  durationMS: 0,
-  elapsedTimeMS: 0,
+  get durationMS() {
+    return this._durationMS_ || 0;
+  },
+  get elapsedTimeMS() {
+    return this._elapsedTimeMS_ || 0;
+  },
 };
 
 // Timer ---------------------------------------------------------
@@ -74,7 +78,7 @@ function startTimer() {
     intervalID = setInterval(() => {
       const { elapsedTimeMS } = values;
 
-      values.setElapseTime = elapsedTimeMS + STEP_MS;
+      values.elapseTimeMS = elapsedTimeMS + STEP_MS;
     }, STEP_MS);
   }
 }
@@ -82,9 +86,9 @@ function startTimer() {
 // DOM listeners -------------------------------------------------
 function onDurationInput(event) {
   const { value } = event.target;
-  values.setDuration = value * 1000;
+  values.durationMS = value * 1000;
 }
 
 function onResetButtonClick() {
-  values.setElapseTime = 0;
+  values.elapseTimeMS = 0;
 }
