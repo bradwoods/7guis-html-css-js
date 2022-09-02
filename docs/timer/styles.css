@@ -34,21 +34,8 @@ section#timer {
 
 #timer section#gauge {
   display: flex;
-}
-
-#timer div#progressOuter {
-  width: 160px;
-  margin-left: 16px;
-  padding: 2px;
-
-  border: 1px solid var(--text-color);
-}
-
-#timer div#progressInner {
-  width: 0;
-  height: 100%;
-
-  background: var(--text-color);
+  align-items: center;
+  gap: 8px;
 }
 
 #timer div#duration {

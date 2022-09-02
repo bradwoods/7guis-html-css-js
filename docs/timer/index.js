@@ -4,7 +4,7 @@ const STEP_MS = 100;
 
 const elems = {
   duration: document.querySelector("output#duration"),
-  progress: document.querySelector("#progressInner"),
+  progress: document.querySelector("progress"),
 };
 
 // Displaying values ---------------------------------------------------------
@@ -20,12 +20,12 @@ function setDurationDisplay() {
 
 function setProgressDisplay() {
   const { durationMS, elapsedTimeMS } = values;
-  const currentValue = elems.progress.style.width;
-  const widthFraction = Math.min(elapsedTimeMS / durationMS, 1);
-  const newValue = `${widthFraction * 100}%`;
+  const currentValue = elems.progress.value;
+  const newValue = Math.min(elapsedTimeMS / durationMS, 1) * 100;
 
   if (currentValue !== newValue) {
-    elems.progress.style.width = newValue;
+    elems.progress.value = newValue;
+    elems.progress.textContent = `${newValue}%`;
   }
 }
 
