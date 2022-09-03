@@ -3,18 +3,20 @@ let intervalID = null;
 const STEP_MS = 100;
 
 const elems = {
-  duration: document.querySelector("output#duration"),
+  durationInput: document.querySelector("#durationInput"),
+  durationOutput: document.querySelector("#durationOutput"),
   progress: document.querySelector("progress"),
+  reset: document.querySelector("button"),
 };
 
 // Displaying values ---------------------------------------------------------
 function setDurationDisplay() {
   const { elapsedTimeMS } = values;
-  const currentValue = elems.duration.innerHTML;
+  const currentValue = elems.durationOutput.innerHTML;
   const newValue = `${elapsedTimeMS / 1000}s`;
 
   if (currentValue !== newValue) {
-    elems.duration.innerHTML = newValue;
+    elems.durationOutput.innerHTML = newValue;
   }
 }
 
@@ -84,11 +86,11 @@ function startTimer() {
 }
 
 // DOM listeners -------------------------------------------------
-function onDurationInput(event) {
+elems.durationInput.oninput = function (event) {
   const { value } = event.target;
   values.durationMS = value * 1000;
-}
+};
 
-function onResetButtonClick() {
+elems.reset.onclick = function () {
   values.elapseTimeMS = 0;
-}
+};

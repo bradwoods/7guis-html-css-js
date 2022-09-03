@@ -38,7 +38,7 @@ section#timer {
   gap: 8px;
 }
 
-#timer div#duration {
+#timer div.duration {
   display: flex;
 }
 
