@@ -12,18 +12,18 @@ const elems = {
 // Displaying values ---------------------------------------------------------
 function setDurationDisplay() {
   const { elapsedTimeMS } = values;
-  const currentValue = elems.durationOutput.innerHTML;
+  const currentValue = elems.durationOutput.textContent;
   const newValue = `${elapsedTimeMS / 1000}s`;
 
   if (currentValue !== newValue) {
-    elems.durationOutput.innerHTML = newValue;
+    elems.durationOutput.textContent = newValue;
   }
 }
 
 function setProgressDisplay() {
   const { durationMS, elapsedTimeMS } = values;
   const currentValue = elems.progress.value;
-  const newValue = Math.min(elapsedTimeMS / durationMS, 1) * 100;
+  const newValue = durationMS === 0 ? 0 : Math.min(elapsedTimeMS / durationMS, 1) * 100;
 
   if (currentValue !== newValue) {
     elems.progress.value = newValue;
