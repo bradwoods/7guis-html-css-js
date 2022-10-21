@@ -64,7 +64,7 @@
     const y = selected.circle.getAttribute("cy");
 
     elems.input.value = selected.diameter;
-    elems.label.innerHTML = `Adjust diameter of circle at (${x}, ${y}).`;
+    elems.label.textContent = `Adjust diameter of circle at (${x}, ${y}).`;
 
     show(elems.form);
   }
