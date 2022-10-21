@@ -76,18 +76,18 @@
       <section id="circleDrawer">
         <h1>Circle Drawer</h1>
         <div id="body">
-          <button id="undo" onClick="onUndoClick()" disabled>UNDO</button>
-          <button id="redo" onClick="onRedoClick()" disabled>REDO</button>
-          <svg onclick="onSvgClick(event)"></svg>
+          <button id="undo" disabled>UNDO</button>
+          <button id="redo" disabled>REDO</button>
+          <svg></svg>
           <section class="hide" id="menu">
-            <button class="close" onClick="onMenuCloseClick()" type="button">x</button>
-            <button onClick="onAdjustDiameterClick()">ADJUST DIAMETER</button>
+            <button class="close" id="closeMenu" type="button">x</button>
+            <button id="openAdjustDiameter">ADJUST DIAMETER</button>
           </section>
           <form class="hide" id="adjustDiameter">
-            <button class="close" onClick="onFormCloseClick()" type="button">x</button>
+            <button class="close" id="closeForm" type="button">x</button>
             <div id="adjustDiameterBody">
               <label for="diameter"></label>
-              <input id="diameter" type="range" step="1" min="8" max="100" oninput="onDiameterInput(event)" />
+              <input id="diameter" type="range" step="1" min="8" max="100" />
             </div>
           </form>
         </div>
