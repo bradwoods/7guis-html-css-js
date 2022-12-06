@@ -39,7 +39,6 @@ body {
 
   color: var(--text-color);
   background: var(--background-color);
-  -webkit-font-smoothing: antialiased;
 }
 
 h1 {
